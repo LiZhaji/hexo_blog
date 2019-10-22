@@ -1,8 +1,6 @@
 ---
 title: js引用类型：对象赋值失败，取到的总是最后一项
 date: 2019-10-11 15:15:03
-tags:
-comments: true
 categories: javascript
 ---
 

@@ -3,12 +3,12 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 炸鸡的博客
+title: 炸鸡的Blog
 subtitle: 
-description: 
+description: 炸鸡的博客Blog,Web前端
 keywords: 
 author: 炸鸡
-language: cn
+language: zh-Hans
 timezone: 
 
 # URL
@@ -75,7 +75,7 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 # theme: landscape
-theme: false
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
