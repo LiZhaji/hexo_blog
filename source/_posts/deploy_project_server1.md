@@ -1,5 +1,5 @@
 ---
-title: 前端项目部署到阿里云
+title: 前端项目部署到阿里云 serve运行(1)
 date: 2019-10-19 19:31:43
 categories: 实践
 ---
@@ -37,4 +37,11 @@ categories: 实践
 - 要注意以下几点：
 1. 要访问的话，用该服务器ip地址 + 启动的端口号
 2. serve是用来启动服务的， . 表示当前目录，打开网址默认显示 index.html  ，要是index不存在，就显示空白页面。
-3. 如果该服务关闭，则页面也就无法访问了。
+3. 系统会自动清理进程，页面会无法访问，需要重启。
+
+
+推荐阅读：
+
+[前端项目部署到阿里云 持续运行(2)](http://blog.escript.cn/deploy_project_server2/)
+
+[前端项目部署到阿里云 lnmp运行(3)](http://blog.escript.cn/deploy_project_server3/)
