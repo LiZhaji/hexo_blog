@@ -1,7 +1,7 @@
 ---
 title: trifle
 date: 2019-11-05 22:54:06
-catalogies: trifle
+categories: 生活
 ---
 
 2019年11月3日晚，明非陪我去买了MBP，西湖银泰店。

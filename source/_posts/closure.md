@@ -1,7 +1,7 @@
 ---
 title: 闭包面试题解析
 date: 2019-10-22 18:46:40
-catalogies: javascript
+categories: javascript
 ---
 
 # 原题

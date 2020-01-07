@@ -1,7 +1,7 @@
 ---
 title: 引入Spring boot项目失败问题
 date: 2019-11-04 17:26:40
-catalogies: java
+categories: java
 ---
 
 想要打开别人的Spring boot项目，import的包总是报错，运行不了。

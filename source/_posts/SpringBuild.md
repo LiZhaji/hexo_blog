@@ -1,9 +1,8 @@
 ---
 title: IDEA SpringMVC与Springboot项目的搭建记录
 date: 2019-11-05 16:43:40
-catalogies: java
+categories: java
 ---
-
 
 spring mvc和spring boot，后者相对来说更大一些，比如包含了tomcat，本质·上都是java + java包，只是不同的方式导入不同的包罢了。
 它们的快速构建方式也有所不同，在此做个记录。

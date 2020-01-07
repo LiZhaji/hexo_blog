@@ -1,7 +1,7 @@
 ---
 title: 前端项目部署到阿里云 lnmp运行(3)
 date: 2019-10-30 14:38:20
-tags:
+categories: 实践
 ---
 [上一篇文章](http://blog.escript.cn/deploy_project_server2/)使用了`pm2`保持进程不被杀死，从而提供永久访问。但是此方法有个弊端就是只能开启不同的端口号进行访问，域名之后还要跟端口号，不美观
 
