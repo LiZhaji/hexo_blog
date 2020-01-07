@@ -1,7 +1,7 @@
 ---
 title: 五子棋之面对面下棋
 date: 2019-10-23 23:13:46
-categories: javascrpt
+categories: javascript
 ---
 
 <!-- 2. 五子棋之人机大战 -->
