@@ -12,6 +12,7 @@ categories: javascript
 实现技术是前端路由系统，路由可以根据不同的url显示不同的内容，目前主要有两种方式实现：
 - hash值，location.hash 和 window.onhashchange
 - history，history.pushState 和 window.onpopstate，H5新增
+
 # hash
 hashchange事件，当路由当hash值发生改变时调用，包括#及其后面的片段标识符
 - 改变url
@@ -23,6 +24,7 @@ hashchange事件，当路由当hash值发生改变时调用，包括#及其后�
   - 更新视图（hashchange）
 - 监听hash变化（监听url变化）
   - 更新视图
+
 ### 简单的js实现
 ```html
 <p><a href="#/home">Home</a></p>
@@ -95,6 +97,7 @@ popstate事件，历史栈的state状态发生变化时调用
 - 地址栏hash改变 
 - ⚠️pushState和replaceState不会触发popstate事件
 - 🙅刷新页面会出现404，因此需要后端配合进行重定向
+
 ### 思路
 主要实现两个监听事件，并执行对应的逻辑
 - 监听dom点击事件
@@ -102,6 +105,7 @@ popstate事件，历史栈的state状态发生变化时调用
   - 更新视图（手动调用）
 - 监听url变化
   - 更新视图
+
 ### 简单的js实现
 方便起见，直接把click的事件监听写到html中了。
 ```html
