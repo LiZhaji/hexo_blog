@@ -1,6 +1,6 @@
 ---
 title: 前端路由实现 hash和history
-date: 2019-01-09 17:59:20
+date: 2020-01-09 17:59:20
 categories: javascript
 ---
 
@@ -12,7 +12,7 @@ categories: javascript
 实现技术是前端路由系统，路由可以根据不同的url显示不同的内容，目前主要有两种方式实现：
 - hash值，location.hash 和 window.onhashchange
 - history，history.pushState 和 window.onpopstate，H5新增
-## hash
+# hash
 hashchange事件，当路由当hash值发生改变时调用，包括#及其后面的片段标识符
 - 改变url
 - location.hash = xx
@@ -89,7 +89,7 @@ html代码同上，实着是大同小异的。借此熟悉es6语法吧。
   Route.add("/result", "result");
 </script>
 ```
-## history
+# history
 popstate事件，历史栈的state状态发生变化时调用
 - 前进、后退浏览器 back() forward() go()
 - 地址栏hash改变 
