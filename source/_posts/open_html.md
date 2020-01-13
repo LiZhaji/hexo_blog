@@ -1,7 +1,7 @@
 ---
 title: 如何打开html页面
 date: 2020-01-09 20:10:28
-tags: 其他
+tags: 实践
 ---
 # open in default browser
 之前启动html都是采用右键 open in default browser，这样子打开的文件是file协议。
