@@ -7,7 +7,7 @@
     "clean": "hexo clean",
     "deploy": "hexo deploy",
     "server": "hexo server",
-    "new": "hexo new Koa"
+    "new": "hexo new first_minipro"
   },
   "hexo": {
     "version": "3.9.0"
