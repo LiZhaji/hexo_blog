@@ -243,8 +243,8 @@ wechat_subscriber:
 
 # Reward
 reward_comment: 
-wechatpay: /images/wechatpay.jpg
-alipay: /images/alipay.jpg
+wechatpay: /images/add_wechat.jpg
+# alipay: /images/alipay.jpg
 #bitcoin: /images/bitcoin.png
 
 # Declare license on posts
