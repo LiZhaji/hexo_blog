@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/avatar.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Web, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="编写PRD PD决定了小程序的定位和功能后，第一步就是编写产品需求文档（PRD：Product Requirements Document) 因为是自己开发，无需太详细，列出主要的功能点，加以简单描述就好。 个人比较喜欢语雀，因此都是用语雀写的文档。 设计页面 UI&amp;amp;交互根据PRD设计页面， 并准备好需要用到的素材，如切图、icon等。工具：Sketch 数据库设计考虑到需要上线，最终还是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一条龙：小程序从零至上线">
+<meta property="og:url" content="zhaji.com/first_minipro/index.html">
+<meta property="og:site_name" content="炸鸡的Blog">
+<meta property="og:description" content="编写PRD PD决定了小程序的定位和功能后，第一步就是编写产品需求文档（PRD：Product Requirements Document) 因为是自己开发，无需太详细，列出主要的功能点，加以简单描述就好。 个人比较喜欢语雀，因此都是用语雀写的文档。 设计页面 UI&amp;amp;交互根据PRD设计页面， 并准备好需要用到的素材，如切图、icon等。工具：Sketch 数据库设计考虑到需要上线，最终还是">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-09T15:28:36.759Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一条龙：小程序从零至上线">
+<meta name="twitter:description" content="编写PRD PD决定了小程序的定位和功能后，第一步就是编写产品需求文档（PRD：Product Requirements Document) 因为是自己开发，无需太详细，列出主要的功能点，加以简单描述就好。 个人比较喜欢语雀，因此都是用语雀写的文档。 设计页面 UI&amp;amp;交互根据PRD设计页面， 并准备好需要用到的素材，如切图、icon等。工具：Sketch 数据库设计考虑到需要上线，最终还是">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: false,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="zhaji.com/first_minipro/">
+
+
+
+
+
+  <title>一条龙：小程序从零至上线 | 炸鸡的Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">炸鸡的Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="zhaji.com/first_minipro/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="炸鸡">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="炸鸡的Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">一条龙：小程序从零至上线</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-09T23:03:44+08:00">
+                2020-02-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="编写PRD-PD"><a href="#编写PRD-PD" class="headerlink" title="编写PRD PD"></a>编写PRD PD</h1><p>决定了小程序的定位和功能后，第一步就是编写产品需求文档（PRD：Product Requirements Document)</p>
+<p>因为是自己开发，无需太详细，列出主要的功能点，加以简单描述就好。</p>
+<p>个人比较喜欢语雀，因此都是用语雀写的文档。</p>
+<h1 id="设计页面-UI-amp-交互"><a href="#设计页面-UI-amp-交互" class="headerlink" title="设计页面 UI&amp;交互"></a>设计页面 UI&amp;交互</h1><p>根据PRD设计页面， 并准备好需要用到的素材，如切图、icon等。<br>工具：Sketch</p>
+<h1 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h1><p>考虑到需要上线，最终还是要用到线上数据库，因此在服务器下的mysql新建了数据库（采用了线上数据库：phpmyadmin页面）。当然为了方便，可以先在本地数据库新建，本地调试成功后再连接服务器的。</p>
+<h1 id="小程序开发"><a href="#小程序开发" class="headerlink" title="小程序开发"></a>小程序开发</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>若先前未曾开发过小程序，则在真正开发前需要一些准备工作，如小程序官网注册账号、下载小程序开发工具等，参考官网：<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/getstart.html#%E7%94%B3%E8%AF%B7%E5%B8%90%E5%8F%B7" target="_blank" rel="noopener">https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/getstart.html#%E7%94%B3%E8%AF%B7%E5%B8%90%E5%8F%B7</a></p>
+<h2 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h2><p>小程序跟前端类似，可快览官网提供的组件、基本api，知道有这些东西，等用到的时候细看即可。</p>
+<p>阅读微信小程序官网文档基本就能有个了解，有前端基础的大概看0.5-1小时就能了解大部分，可以进行开发了。<br>主要有三步：</p>
+<ul>
+<li>从官网注册小程序账号，获得AppId</li>
+<li>下载小程序开发工具</li>
+<li>了解项目构成，进行基本开发</li>
+</ul>
+<h2 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h2><p>在开发过程中可以把需要用到的接口简单规定一下，避免写完服务端还要多余地修改小程序接口代码。<br>基本开发完后便可以着手服务端了。</p>
+<h2 id="插件使用"><a href="#插件使用" class="headerlink" title="插件使用"></a>插件使用</h2><p>小程序中有图片的业务需求。一般的图片并不会直接存到服务器或数据里，而是用存储对象进行上传下载，在数据库中存的是直接可以访问到的图片地址。</p>
+<p>阿里云的OSS存储对象要付费，七牛云有免费额度可以使用。因此使用了七牛云。</p>
+<p>七牛已经有了上传图片的小程序插件，有基本信息和使用教程：<a href="https://mp.weixin.qq.com/wxopen/pluginbasicprofile?action=intro&amp;appid=wx00caa212d6710dcb&amp;token=607354097&amp;lang=zh_CN" target="_blank" rel="noopener">https://mp.weixin.qq.com/wxopen/pluginbasicprofile?action=intro&amp;appid=wx00caa212d6710dcb&amp;token=607354097&amp;lang=zh_CN</a></p>
+<p>小程序使用插件：</p>
+<ul>
+<li>登录小程序平台 -&gt; 设置 -&gt; 第三方设置 -&gt; 插件管理 -&gt; 添加插件</li>
+<li>搜索该插件，点击添加</li>
+<li>在小程序开发工具里 app.json的plugins下添加代码<br>“qiniuUploader”: {<br>“version”: “1.3.0”,<br>“provider”: “wx00caa212d6710dcb”<br>}<br>⚠️json文件下不能有注释。</li>
+<li>按照该插件教程使用该插件。</li>
+</ul>
+<h1 id="Koa服务端开发与联调"><a href="#Koa服务端开发与联调" class="headerlink" title="Koa服务端开发与联调"></a>Koa服务端开发与联调</h1><h2 id="文档-1"><a href="#文档-1" class="headerlink" title="文档"></a>文档</h2><p>官网：<a href="https://koa.bootcss.com/" target="_blank" rel="noopener">https://koa.bootcss.com/</a><br>详细文档：<a href="https://chenshenhai.github.io/koa2-note/" target="_blank" rel="noopener">https://chenshenhai.github.io/koa2-note/</a></p>
+<h2 id="开发-1"><a href="#开发-1" class="headerlink" title="开发"></a>开发</h2><p>边看文档边开发，通过demo一个基本的get请求就出来了。<br>开发过程中做了些记录，包括热更新、请求数据获取等：<a href="http://blog.escript.cn/Koa/#more" target="_blank" rel="noopener">http://blog.escript.cn/Koa/#more</a></p>
+<h2 id="联调"><a href="#联调" class="headerlink" title="联调"></a>联调</h2><p>可使用浏览器或postman测试接口，没问题后再进行联调。</p>
+<p>联调先与本地联调，没问题后再上传到服务器。</p>
+<p>❗️使用本地调试，localhost一般为http服务，可以先在小程序开发者工具中取消校验。</p>
+<p>❗️但是上线的小程序只允许使用https，最终还是需要配置。</p>
+<h1 id="配置https"><a href="#配置https" class="headerlink" title="配置https"></a>配置https</h1><p>在本地/服务端调试通过后，在微信开发者工具中点击右上角的上传按钮，便可以在公众平台 -&gt; 版本管理 -&gt; 开发者版本中看到了，可以将该版本勾选为体验版。</p>
+<p>在成员管理 -&gt; 体验成员 中添加成员，该成员即可享受体验版。<br>体验版与线上版本一样，也需要https，若之前未曾配置，体验版就拿不到数据。</p>
+<ul>
+<li>在配置前，首先需要ssl证书，阿里云上可以免费买。买完后绑定域名，验证通过后就可以下载使用了。</li>
+<li>若该项目要上传到服务器，则下载的证书文件最好不要直接暴露在项目中。</li>
+<li>直接下载到服务器：wget url下载链接</li>
+<li>若url失效，则先下载到本地，使用scp xxx.zip root@ip:/root/https ，使用unzip xxx.zip 命令解压</li>
+<li>在Koa项目下下载https，用来启动https服务<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> https = <span class="built_in">require</span>(<span class="string">"https"</span>)</span><br><span class="line"><span class="comment">// SSL options</span></span><br><span class="line"><span class="comment">// 若读取不到文件，则启动http服务</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> options = &#123;</span><br><span class="line">    key: fs.readFileSync(<span class="string">"/root/https/xxx.key"</span>), <span class="comment">//ssl文件路径  下载下来的证书文件</span></span><br><span class="line">    cert: fs.readFileSync(<span class="string">"/root/https/xxx.pem"</span>) <span class="comment">//ssl文件路径  下载下来的证书文件</span></span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="comment">// 创建https 服务</span></span><br><span class="line">  <span class="keyword">const</span> httpsServer = https.createServer(options, app.callback());</span><br><span class="line">  httpsServer.listen(<span class="number">443</span>); <span class="comment">// 默认监听443</span></span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"已启动https服务"</span>);</span><br><span class="line">&#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">  app.listen(<span class="number">3000</span>);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"无证书文件！已启动http服务，端口3000"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Contact</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/add_wechat.jpg" alt="炸鸡 欢迎联系作者～">
+        <p>欢迎联系作者～</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Koa/" rel="next" title="Koa">
+                <i class="fa fa-chevron-left"></i> Koa
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/different_js/" rel="prev" title="不同环境下的JavaScript">
+                不同环境下的JavaScript <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="炸鸡">
+            
+              <p class="site-author-name" itemprop="name">炸鸡</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/LiZhaji" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">炸鸡</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

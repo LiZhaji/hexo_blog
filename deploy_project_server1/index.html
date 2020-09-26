@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/avatar.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Web, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、进入阿里云服务器 打开cmd命令窗口，键入 ssh root@服务器ip地址如果忘了ip地址，打开阿里云服务器登录，点击左上角-轻量应用服务器，点击进入就能看见    键入密码二、新建目录 第三步的clone会自建目录，若不需要，跳到第三 新建文件夹 mkdir &amp;lt;folderName&amp;gt; 进入文件夹 cd &amp;lt;folderName&amp;gt;  返回上级目录 cd .. 查看子文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端项目部署到阿里云 serve运行(1)">
+<meta property="og:url" content="zhaji.com/deploy_project_server1/index.html">
+<meta property="og:site_name" content="炸鸡的Blog">
+<meta property="og:description" content="一、进入阿里云服务器 打开cmd命令窗口，键入 ssh root@服务器ip地址如果忘了ip地址，打开阿里云服务器登录，点击左上角-轻量应用服务器，点击进入就能看见    键入密码二、新建目录 第三步的clone会自建目录，若不需要，跳到第三 新建文件夹 mkdir &amp;lt;folderName&amp;gt; 进入文件夹 cd &amp;lt;folderName&amp;gt;  返回上级目录 cd .. 查看子文件">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-a19a129277ba6526ae73daca709b3817_hd.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-93be89ea241f641b26435e1b98e8cd32_hd.png">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-88f0b462a90b4a0ad26d855ef74caad5_hd.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-b4e9c79dac0e38a0b8df659918e35b99_hd.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-71df4229830f70e04760daf7f47f6c3f_hd.jpg">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-76735e6bc0773a693ff23e6ab0f684ec_hd.jpg">
+<meta property="og:updated_time" content="2019-11-05T02:45:58.228Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端项目部署到阿里云 serve运行(1)">
+<meta name="twitter:description" content="一、进入阿里云服务器 打开cmd命令窗口，键入 ssh root@服务器ip地址如果忘了ip地址，打开阿里云服务器登录，点击左上角-轻量应用服务器，点击进入就能看见    键入密码二、新建目录 第三步的clone会自建目录，若不需要，跳到第三 新建文件夹 mkdir &amp;lt;folderName&amp;gt; 进入文件夹 cd &amp;lt;folderName&amp;gt;  返回上级目录 cd .. 查看子文件">
+<meta name="twitter:image" content="https://pic4.zhimg.com/80/v2-a19a129277ba6526ae73daca709b3817_hd.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: false,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="zhaji.com/deploy_project_server1/">
+
+
+
+
+
+  <title>前端项目部署到阿里云 serve运行(1) | 炸鸡的Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">炸鸡的Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="zhaji.com/deploy_project_server1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="炸鸡">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="炸鸡的Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">前端项目部署到阿里云 serve运行(1)</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-19T19:31:43+08:00">
+                2019-10-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、进入阿里云服务器"><a href="#一、进入阿里云服务器" class="headerlink" title="一、进入阿里云服务器"></a>一、进入阿里云服务器</h2><ul>
+<li>打开cmd命令窗口，键入 ssh root@服务器ip地址<br>如果忘了ip地址，打开阿里云服务器登录，点击左上角-轻量应用服务器，点击进入就能看见<br><img src="https://pic4.zhimg.com/80/v2-a19a129277ba6526ae73daca709b3817_hd.jpg" alt></li>
+</ul>
+<p><img src="https://pic3.zhimg.com/80/v2-93be89ea241f641b26435e1b98e8cd32_hd.png" alt></p>
+<ul>
+<li>键入密码<h2 id="二、新建目录"><a href="#二、新建目录" class="headerlink" title="二、新建目录"></a>二、新建目录</h2></li>
+<li>第三步的clone会自建目录，若不需要，跳到第三</li>
+<li>新建文件夹 <code>mkdir &lt;folderName&gt;</code></li>
+<li>进入文件夹 <code>cd &lt;folderName&gt;</code> </li>
+<li>返回上级目录 <code>cd ..</code></li>
+<li>查看子文件 <code>ls</code>  </li>
+<li>查看具体文件 <code>cat &lt;foldName&gt;</code><h2 id="三、clone项目"><a href="#三、clone项目" class="headerlink" title="三、clone项目"></a>三、clone项目</h2></li>
+<li>下载 <code>git yum install git</code></li>
+<li>克隆项目 <code>git clone &lt;仓库地址&gt;</code></li>
+<li>出现报错：<br><img src="https://pic2.zhimg.com/80/v2-88f0b462a90b4a0ad26d855ef74caad5_hd.jpg" alt></li>
+<li>解决错误：生成该服务器的ssh密钥 <code>ssh-keygen -t rsa -C &quot;yourEmaill@163.com&quot;</code><br>拿到密钥 <code>cat &lt;存储目录&gt;</code><br>添加到github账号上<br><img src="https://pic2.zhimg.com/80/v2-b4e9c79dac0e38a0b8df659918e35b99_hd.jpg" alt></li>
+<li>重新clone项目<h2 id="四、运行"><a href="#四、运行" class="headerlink" title="四、运行"></a>四、运行</h2></li>
+<li>进入到需要部署的项目的文件夹中，执行 <code>serve .</code></li>
+<li>如果报错提示： <code>-bash: serve: command not found</code>  执行 <code>npm i serve -g</code> 下载</li>
+<li>进入阿里云-轻量应用服务器管理控制台-防火墙-添加规则。将5000端口号新增进去<br><img src="https://pic4.zhimg.com/80/v2-71df4229830f70e04760daf7f47f6c3f_hd.jpg" alt></li>
+<li>重新 serve .<br><img src="https://pic1.zhimg.com/80/v2-76735e6bc0773a693ff23e6ab0f684ec_hd.jpg" alt></li>
+<li>要注意以下几点：</li>
+</ul>
+<ol>
+<li>要访问的话，用该服务器ip地址 + 启动的端口号</li>
+<li>serve是用来启动服务的， . 表示当前目录，打开网址默认显示 index.html  ，要是index不存在，就显示空白页面。</li>
+<li>系统会自动清理进程，页面会无法访问，需要重启。</li>
+</ol>
+<p>推荐阅读：</p>
+<p><a href="http://blog.escript.cn/deploy_project_server2/" target="_blank" rel="noopener">前端项目部署到阿里云 持续运行(2)</a></p>
+<p><a href="http://blog.escript.cn/deploy_project_server3/" target="_blank" rel="noopener">前端项目部署到阿里云 lnmp运行(3)</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Contact</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/add_wechat.jpg" alt="炸鸡 欢迎联系作者～">
+        <p>欢迎联系作者～</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/v8_memory/" rel="next" title="v8引擎内存笔记">
+                <i class="fa fa-chevron-left"></i> v8引擎内存笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/closure/" rel="prev" title="闭包面试题解析">
+                闭包面试题解析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="炸鸡">
+            
+              <p class="site-author-name" itemprop="name">炸鸡</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/LiZhaji" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">炸鸡</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

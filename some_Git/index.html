@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/avatar.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Web, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="文档已学习链接 官网文档 分支游戏 目的了解git的内部原理，各种命令干了什么。 背景1991年诞生了Linux，由全球各地的人合作产生，从最初的人工合并diff代码，到BitKeeper供其免费使用，最后因为微软人试图破解BitKeeper协议被发现，2002年促使了Git的诞生。  集成式版本控制系统：每次干活之前把最新版本代码从服务器取过来，干完活后上传新版本到服务器。全都依赖服务器，需要联">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git">
+<meta property="og:url" content="zhaji.com/some_Git/index.html">
+<meta property="og:site_name" content="炸鸡的Blog">
+<meta property="og:description" content="文档已学习链接 官网文档 分支游戏 目的了解git的内部原理，各种命令干了什么。 背景1991年诞生了Linux，由全球各地的人合作产生，从最初的人工合并diff代码，到BitKeeper供其免费使用，最后因为微软人试图破解BitKeeper协议被发现，2002年促使了Git的诞生。  集成式版本控制系统：每次干活之前把最新版本代码从服务器取过来，干完活后上传新版本到服务器。全都依赖服务器，需要联">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-14T16:24:16.146Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git">
+<meta name="twitter:description" content="文档已学习链接 官网文档 分支游戏 目的了解git的内部原理，各种命令干了什么。 背景1991年诞生了Linux，由全球各地的人合作产生，从最初的人工合并diff代码，到BitKeeper供其免费使用，最后因为微软人试图破解BitKeeper协议被发现，2002年促使了Git的诞生。  集成式版本控制系统：每次干活之前把最新版本代码从服务器取过来，干完活后上传新版本到服务器。全都依赖服务器，需要联">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: false,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="zhaji.com/some_Git/">
+
+
+
+
+
+  <title>Git | 炸鸡的Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">炸鸡的Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="zhaji.com/some_Git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="炸鸡">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="炸鸡的Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Git</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-15T00:12:47+08:00">
+                2020-02-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h1><p><a href="https://www.liaoxuefeng.com/wiki/896043488029600" target="_blank" rel="noopener">已学习链接</a></p>
+<p><a href="https://git-scm.com/docs" target="_blank" rel="noopener">官网文档</a></p>
+<p><a href="https://learngitbranching.js.org/?NODEMO" target="_blank" rel="noopener">分支游戏</a></p>
+<h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>了解git的内部原理，各种命令干了什么。</p>
+<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>1991年诞生了Linux，由全球各地的人合作产生，从最初的人工合并diff代码，到BitKeeper供其免费使用，最后因为微软人试图破解BitKeeper协议被发现，2002年促使了Git的诞生。</p>
+<ul>
+<li><p>集成式版本控制系统：每次干活之前把最新版本代码从服务器取过来，干完活后上传新版本到服务器。全都依赖服务器，需要联网。如CVS/SVN/VSS</p>
+</li>
+<li><p>分布式版本控制系统：每个人电脑都有一个完整的版本库。不需要联网。如Git/BitKeeper/Mercurial/Bazaar</p>
+<h1 id="使用须知"><a href="#使用须知" class="headerlink" title="使用须知"></a>使用须知</h1></li>
+<li><p>HEAD是指向当前分支下当前版本的指针，HEAD^表示上一个版本，HEAD~100往上一百个版本</p>
+</li>
+<li><p>仓库分为工作区和暂存区</p>
+</li>
+<li><p>同一个本地库可以关联多个不同的远程库，如GitHub 码云等。需要用不同的名称来标识。git remote add origin xxx 默认名称是origin</p>
+<h1 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h1></li>
+</ul>
+<p>git status 查看当前版本库状态<br>git diff 查看difference<br>git log 由近到远显示提交日志<br>–pretty=oneline 查看主要信息<br>–graph 查看分支合并图<br>git reflog 记录历史命令<br>git checkout 切换分支/撤回更改<br>git reset 版本退回/撤回add操作<br>git remote 查看远程仓库<br>-v 查看远程仓库信息<br>rm origin 删除已关联的远程仓库origin<br>git config –scope  自定义git，如更改样式/自定义快捷命令 scope默认是当前仓库<br>仓库在保存.git/config 下，用户在.gitconfig下<br>alias.newCommand ‘origin command’ 自定义快捷命令</p>
+<h1 id="常见场景"><a href="#常见场景" class="headerlink" title="常见场景"></a>常见场景</h1><ul>
+<li><p>获取ssh</p>
+<ul>
+<li>位于.ssh目录，id_rsa 私钥，id_rsa.pub 公钥</li>
+<li>ssh-keygen -t rsa -C “your email” 生成ssh</li>
+<li>Git支持SSH协议，目的是确保该提交的确是本人提交</li>
+</ul>
+</li>
+<li><p>新建代码库<br>case1:</p>
+<ul>
+<li>新建空库</li>
+<li>到代码文件 git init</li>
+<li>git add .</li>
+<li>git commit -m “update”</li>
+<li>git remote add origin xxxx // origin是默认的远程仓库的名字</li>
+<li>git push</li>
+<li>根据提示<br>case2:</li>
+<li>新建空库</li>
+<li>git clone xxxx</li>
+<li>把代码拖进去</li>
+</ul>
+</li>
+<li><p>新建并合并代码</p>
+<ul>
+<li>创建newBranch分支的实质：增加一个newBranch的指针，指向旧分支相同的提交，将HEAD指向dev分支</li>
+<li>git branch 查看分支情况 -d branch 删除分支</li>
+<li>git branch newBranch 创建新分支</li>
+<li>git checkout branchName 切换分支</li>
+<li>git checckout -b newBranch   Switched to a new branch ‘newBranch’ 新建并切换到newBranch分支，从哪个分支切过去就会copy那个分支上的所有代码</li>
+<li>git switch</li>
+<li>git merge aBranch 合并aBranch分支上的代码<ul>
+<li>Fast-forward 快进模式，将master指向aBranch的当前提交，删除分支后会丢掉分支信息，看不出合并过</li>
+<li>–no-ff 普通模式，关闭快进模式，会生成一个commit</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>文件修改操作</p>
+<ul>
+<li>git checkout – file 退回工作区的修改，更改至最近一次add或commit后的状态  === vscode Discard Changes操作</li>
+<li>git reset HEAD file 退回暂存区stage里的修改，撤销add 操作 === vscode Unstage Changes操作</li>
+<li>git rm file 删除文件</li>
+</ul>
+</li>
+<li><p>回退版本</p>
+<ul>
+<li>git reset –hard commit_id/HEAD^/HEAD~n  commit_id可以只取前几位</li>
+<li>git checkout commit_id/HEAD^/HEAD~n</li>
+<li>git log 查看提交历史，确定回退到哪个版本</li>
+<li>git reflog 查看命令历史，确定回到未来的版本</li>
+</ul>
+</li>
+<li><p>修改bug，临时保存工作区</p>
+<ul>
+<li>git stash 临时存储当前保存，使工作区保持干净。一般用于有代码变动未提交时想要切换分支</li>
+<li>list 查看临时存储列表</li>
+<li>pop 恢复现场并删除存储列表内容</li>
+<li>apply ?stash@{0} 恢复某一现场，不从临时存储列表删除</li>
+<li>git cherry-pick commit_id 复制一个commit到本分支，避免重复劳动<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1></li>
+</ul>
+</li>
+</ul>
+<p>mkdir 创建文件夹</p>
+<p>echo 创建文件</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Contact</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/add_wechat.jpg" alt="炸鸡 欢迎联系作者～">
+        <p>欢迎联系作者～</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/different_js/" rel="next" title="不同环境下的JavaScript">
+                <i class="fa fa-chevron-left"></i> 不同环境下的JavaScript
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/toValue&toString/" rel="prev" title="toValue & toString 一览">
+                toValue & toString 一览 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="炸鸡">
+            
+              <p class="site-author-name" itemprop="name">炸鸡</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/LiZhaji" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">炸鸡</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

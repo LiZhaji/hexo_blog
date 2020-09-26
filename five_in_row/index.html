@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/avatar.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Web, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="五子棋，人人皆知，考验智力与耐心。但受限于一张纸和一盘棋子，因此，我试着开发了一个面对面五子棋，让智能手机/平板能够代替实物，冲破限制。 棋盘首先需要生成一个棋盘，用canvas实现即可。 1&amp;lt;canvas id= &quot;canvas&quot;&amp;gt;&amp;lt;/canvas&amp;gt;  1234567891011121314const cv = document.querySelector(&quot;#canv">
+<meta property="og:type" content="article">
+<meta property="og:title" content="五子棋之面对面下棋">
+<meta property="og:url" content="zhaji.com/five_in_row/index.html">
+<meta property="og:site_name" content="炸鸡的Blog">
+<meta property="og:description" content="五子棋，人人皆知，考验智力与耐心。但受限于一张纸和一盘棋子，因此，我试着开发了一个面对面五子棋，让智能手机/平板能够代替实物，冲破限制。 棋盘首先需要生成一个棋盘，用canvas实现即可。 1&amp;lt;canvas id= &quot;canvas&quot;&amp;gt;&amp;lt;/canvas&amp;gt;  1234567891011121314const cv = document.querySelector(&quot;#canv">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-01-07T05:59:02.999Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="五子棋之面对面下棋">
+<meta name="twitter:description" content="五子棋，人人皆知，考验智力与耐心。但受限于一张纸和一盘棋子，因此，我试着开发了一个面对面五子棋，让智能手机/平板能够代替实物，冲破限制。 棋盘首先需要生成一个棋盘，用canvas实现即可。 1&amp;lt;canvas id= &quot;canvas&quot;&amp;gt;&amp;lt;/canvas&amp;gt;  1234567891011121314const cv = document.querySelector(&quot;#canv">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: false,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="zhaji.com/five_in_row/">
+
+
+
+
+
+  <title>五子棋之面对面下棋 | 炸鸡的Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">炸鸡的Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="zhaji.com/five_in_row/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="炸鸡">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="炸鸡的Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">五子棋之面对面下棋</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-23T23:13:46+08:00">
+                2019-10-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!-- 2. 五子棋之人机大战 -->
+<p>五子棋，人人皆知，考验智力与耐心。但受限于一张纸和一盘棋子，因此，我试着开发了一个面对面五子棋，让智能手机/平板能够代替实物，冲破限制。</p>
+<h1 id="棋盘"><a href="#棋盘" class="headerlink" title="棋盘"></a>棋盘</h1><p>首先需要生成一个棋盘，用canvas实现即可。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>= <span class="string">"canvas"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> cv = <span class="built_in">document</span>.querySelector(<span class="string">"#canvas"</span>)</span><br><span class="line"><span class="keyword">const</span> ctx = cv.getContext(<span class="string">"2d"</span>) <span class="comment">//获取canvas上下文</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> vars = &#123;</span><br><span class="line">	n: <span class="number">10</span>, <span class="comment">// 棋盘行数、列数，为正方形</span></span><br><span class="line">  sideLen: <span class="number">50</span> <span class="comment">// 每小格边长50px</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; vars.n; i++)&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; vars.n; j++)&#123;</span><br><span class="line">		ctx.strokeRect(i * vars.sideLen, j * vars.sideLen, vars.sideLen, vars.sideLen)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 还能画出各种花里胡哨的东西，比如城墙、方格纸..</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="点击生成棋子"><a href="#点击生成棋子" class="headerlink" title="点击生成棋子"></a>点击生成棋子</h1><p>主要有四步：</p>
+<ol>
+<li>判断点击位置是否有效</li>
+<li>确定落在哪个交叉点上</li>
+<li>生成棋子</li>
+<li>更新棋盘状态</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 记录棋盘棋子状态，0：空，1：已有黑棋，2：已有白棋</span></span><br><span class="line"><span class="comment">// 作用：判断是否重复点击</span></span><br><span class="line"><span class="keyword">const</span> pieceCount = []</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt;= vars.n; i++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> j = <span class="number">0</span>; j &lt;= vars.n; j++)&#123;</span><br><span class="line">      pieceCount[x][y] = <span class="number">0</span> </span><br><span class="line">    &#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">init()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 假设都生成黑棋，还未区分角色</span></span><br><span class="line">cv.addEventListener(<span class="string">'click'</span>, (e) =&gt; &#123;</span><br><span class="line">  <span class="comment">// 相对于事件对象的偏移位置，也就是(0,0)</span></span><br><span class="line">  <span class="keyword">const</span> distanceX = e.offsetX</span><br><span class="line">  <span class="keyword">const</span> distanceY = e.offsetY</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> result = ifValid(distanceX, distanceY)</span><br><span class="line">	<span class="keyword">if</span>(!result)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'点击位置无效！'</span>)</span><br><span class="line">  	<span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  printPiece(x * vars.sideLen, y * vars.sideLen)</span><br><span class="line">	pieceCount[x][y] = <span class="number">1</span></span><br><span class="line"> &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 有两种情况无效：1. 该位置上已有棋子； 2. 点击位置不在有效范围内</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ifValid</span>(<span class="params">distanceX, distanceY</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">const</span> validR = <span class="number">30</span> <span class="comment">//可以作为变量放入vars对象</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> x = <span class="built_in">Math</span>.round(distanceX / vars.sideLen)</span><br><span class="line">  <span class="keyword">const</span> y = <span class="built_in">Math</span>.round(distanceY / vars.sideLen)</span><br><span class="line">  <span class="keyword">if</span>(pieceCount[x][y])&#123;</span><br><span class="line">  	<span class="keyword">return</span> </span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> boardX = x * vars.sideLen</span><br><span class="line">  <span class="keyword">const</span> boardY = y * vars.sideLen</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(<span class="built_in">Math</span>.abs(distanceX - boardX) &lt; validR &amp;&amp; </span><br><span class="line">     <span class="built_in">Math</span>.abs(distanceY - boardY) &lt; validR)&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">    	x: x,</span><br><span class="line">      y: y</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 画出一颗棋子</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printPiece</span>(<span class="params">x, y</span>)</span>&#123;</span><br><span class="line">  ctx.moveTo(x + vars.sideLen / <span class="number">2</span>, y)</span><br><span class="line">  ctx.arc(x, y, vars.sideLen, <span class="number">0</span>, <span class="built_in">Math</span>.PI * <span class="number">2</span>)</span><br><span class="line">  ctx.fill()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="区分角色"><a href="#区分角色" class="headerlink" title="区分角色"></a>区分角色</h1><p>只有两种角色，用一个布尔值来区分<br>只要在上一步的最后增加更新角色状态即可</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只把需要更改的函数重写了一下</span></span><br><span class="line"><span class="keyword">let</span> isBlackTime = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">cv.addEventListener(<span class="string">'click'</span>, (e) =&gt; &#123;</span><br><span class="line">  <span class="comment">// 相对于事件对象的偏移位置，也就是(0,0)</span></span><br><span class="line">  <span class="keyword">const</span> distanceX = e.offsetX</span><br><span class="line">  <span class="keyword">const</span> distanceY = e.offsetY</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> result = ifValid(distanceX, distanceY)</span><br><span class="line">	<span class="keyword">if</span>(!result)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'点击位置无效！'</span>)</span><br><span class="line">  	<span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  printPiece(x * vars.sideLen, y * vars.sideLen, isBlackTime ? <span class="string">'black'</span> : <span class="string">'wheat'</span>)</span><br><span class="line">	pieceCount[x][y] = isBlackTime ? <span class="number">1</span> : <span class="number">2</span></span><br><span class="line">  isBlackTime = !isBlackTime</span><br><span class="line"> &#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 画出一颗棋子</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">printPiece</span>(<span class="params">x, y, color</span>)</span>&#123;</span><br><span class="line">	ctx.beginPath()</span><br><span class="line">  ctx.moveTo(x + vars.sideLen / <span class="number">2</span>, y)</span><br><span class="line">  ctx.arc(x, y, vars.sideLen, <span class="number">0</span>, <span class="built_in">Math</span>.PI * <span class="number">2</span>)</span><br><span class="line">  ctx.fillStyle = color</span><br><span class="line">  ctx.fill()</span><br><span class="line">  ctx.closePath()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="获胜"><a href="#获胜" class="headerlink" title="获胜"></a>获胜</h1><p>有两种思路</p>
+<ul>
+<li>不用记录，每次下完棋去判断棋子的横、竖、正斜、反斜四个方向上的9颗是否有相同且连续的5颗</li>
+<li>需要记录，每颗棋子有八个方向，记录每个方向的拥有的棋子数，每生成一颗就更新，有5就结束</li>
+</ul>
+<p>这里因为后续有人机对战，所以采用了第二种方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 记录每个棋子不同方向的棋子数</span></span><br><span class="line"><span class="comment">// -2：为对方棋子 -1：该方向越界了 1：该方向上没有别的棋子，只有刚下的自己...</span></span><br><span class="line"><span class="keyword">const</span> process = &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> gameover = <span class="literal">false</span></span><br><span class="line"><span class="keyword">let</span> blackSuc = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">success</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> curPiece = piecesCount[x][y]; <span class="comment">// 当前位置 0: 空, 1: 黑棋, 2: 白棋</span></span><br><span class="line">  <span class="keyword">const</span> key = <span class="string">""</span> + curPiece + <span class="string">"_"</span> + x + <span class="string">"_"</span> + y;</span><br><span class="line">  process[key] = process[key] || &#123;&#125;;</span><br><span class="line">  <span class="keyword">const</span> dirs = process[key];</span><br><span class="line">  </span><br><span class="line">   <span class="comment">// 左上，上，右上，左，右，左下，下，右下</span></span><br><span class="line">  <span class="keyword">const</span> tempDir = [<span class="string">"lup"</span>, <span class="string">"up"</span>, <span class="string">"rup"</span>, <span class="string">"l"</span>, <span class="string">"r"</span>, <span class="string">"lbt"</span>, <span class="string">"bt"</span>, <span class="string">"rbt"</span>];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 按照tempDir的顺序 计算该棋子每个方向的相同棋子数</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> jj = y - <span class="number">1</span>; jj &lt;= y + <span class="number">1</span>; jj++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> ii = x - <span class="number">1</span>; ii &lt;= x + <span class="number">1</span>; ii++) &#123;</span><br><span class="line">      <span class="comment">// 避免多余的循环</span></span><br><span class="line">      <span class="keyword">if</span> (gameover) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 该位置本身不参与记录</span></span><br><span class="line">      <span class="keyword">if</span> (jj === y &amp;&amp; ii === x) &#123;</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">const</span> curDir = tempDir.shift();</span><br><span class="line">      <span class="comment">// 表示该方向越界了</span></span><br><span class="line">      <span class="keyword">if</span> (jj &lt; <span class="number">0</span> || ii &lt; <span class="number">0</span> || jj &gt; rows.rowNum || ii &gt; rows.rowNum) &#123;</span><br><span class="line">        dirs[curDir] = <span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      dirs[curDir] = getDirCount(ii, jj, curDir, curPiece);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  process[key] = dirs;</span><br><span class="line">  <span class="keyword">if</span> (gameover) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDirCount</span>(<span class="params">x, y, curDir, curPiece</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> targetPiece = piecesCount[x][y]; <span class="comment">// 该方向上的第一个棋子</span></span><br><span class="line">  <span class="keyword">const</span> index = dirs.findIndex(<span class="function"><span class="params">dir</span> =&gt;</span> dir === curDir);</span><br><span class="line">  <span class="keyword">const</span> revDir = dirs[dirs.length - index - <span class="number">1</span>];</span><br><span class="line">  <span class="keyword">let</span> tarCount = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 如果第一颗棋子为空，返回1，表示只有它本身</span></span><br><span class="line">  <span class="keyword">if</span> (!targetPiece) &#123;</span><br><span class="line">    <span class="keyword">return</span> tarCount;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (targetPiece === curPiece) &#123;</span><br><span class="line">    <span class="comment">// 1. 目标count = 当前count + 1</span></span><br><span class="line">    <span class="keyword">const</span> ii = dirOprs[curDir][<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">const</span> jj = dirOprs[curDir][<span class="number">1</span>];</span><br><span class="line">    <span class="keyword">const</span> curCount =</span><br><span class="line">      process[<span class="string">""</span> + targetPiece + <span class="string">"_"</span> + x + <span class="string">"_"</span> + y][curDir] &gt; <span class="number">0</span></span><br><span class="line">        ? process[<span class="string">""</span> + targetPiece + <span class="string">"_"</span> + x + <span class="string">"_"</span> + y][curDir]</span><br><span class="line">        : <span class="number">1</span>; <span class="comment">// 小于0表示没有一样的棋子，不能用该值参与计算</span></span><br><span class="line">    tarCount = curCount + <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 当前方向上所有的棋子反方向的count 更新</span></span><br><span class="line">    <span class="comment">// 需判断新棋子的反方向有无自家棋子,有则需要全部重新赋值</span></span><br><span class="line">    <span class="keyword">const</span> realCount =</span><br><span class="line">      process[<span class="string">""</span> + targetPiece + <span class="string">"_"</span> + (x - ii) + <span class="string">"_"</span> + (y - jj)][revDir];</span><br><span class="line">    <span class="keyword">const</span> revCount = realCount &gt; <span class="number">1</span> ? realCount : <span class="number">1</span>;<span class="comment">// 大于1表示有</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> k = <span class="number">0</span>; k &lt; curCount; k++) &#123;</span><br><span class="line">      process[<span class="string">""</span> + targetPiece + <span class="string">"_"</span> + (x + ii * k) + <span class="string">"_"</span> + (y + jj * k)][</span><br><span class="line">        revDir</span><br><span class="line">      ] += revCount;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 11011情况</span></span><br><span class="line">    <span class="keyword">if</span> (revCount &gt; <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> k = <span class="number">2</span>; k &lt;= revCount; k++) &#123;</span><br><span class="line">        <span class="keyword">let</span> rp = (process[</span><br><span class="line">          <span class="string">""</span> + targetPiece + <span class="string">"_"</span> + (x - ii * k) + <span class="string">"_"</span> + (y - jj * k)</span><br><span class="line">        ][curDir] += tarCount - <span class="number">1</span>); <span class="comment">// 减去新棋的重复</span></span><br><span class="line">        <span class="keyword">if</span> (rp &gt;= <span class="number">5</span>) &#123;</span><br><span class="line">          gameover = <span class="literal">true</span>;</span><br><span class="line">          blackSuc = curPiece === <span class="number">1</span> ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">          <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 表示第一颗棋为对方棋子, 不仅要返回-2, 还要设置对方棋反方向的count = -2</span></span><br><span class="line">    tarCount = <span class="number">-2</span>;</span><br><span class="line">    process[<span class="string">""</span> + targetPiece + <span class="string">"_"</span> + x + <span class="string">"_"</span> + y][revDir] = <span class="number">-2</span>;</span><br><span class="line">    <span class="keyword">return</span> tarCount;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (tarCount &gt;= <span class="number">5</span>) &#123;</span><br><span class="line">    gameover = <span class="literal">true</span>;</span><br><span class="line">    blackSuc = curPiece === <span class="number">1</span> ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> tarCount;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上只是把重要的代码整理了出来，全部代码参考<a href="https://github.com/LiZhaji/five_in_row" target="_blank" rel="noopener">GitHub源码</a></p>
+<p>如有错误/理解不当/更好建议，欢迎Issue或联系我！</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Contact</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/add_wechat.jpg" alt="炸鸡 欢迎联系作者～">
+        <p>欢迎联系作者～</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/closure/" rel="next" title="闭包面试题解析">
+                <i class="fa fa-chevron-left"></i> 闭包面试题解析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/deploy_project_server2/" rel="prev" title="前端项目部署到阿里云 持续运行(2)">
+                前端项目部署到阿里云 持续运行(2) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="炸鸡">
+            
+              <p class="site-author-name" itemprop="name">炸鸡</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/LiZhaji" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">炸鸡</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
