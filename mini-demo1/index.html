@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/avatar.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Web, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一、引言与准备17年微信小程序正式发布后，凭借其无需安装、触手可及、用完即走的优势爆火。至今依旧处于火热状态，不仅如此，小程序生态圈也在不断扩大，除了微信，各大主流app都安排上了自己的小程序，比如百度、支付宝、淘宝等。 据统计，至20年上半年，微信小程序数量已超320万，是所有平台中占比最高的；全网小程序累积已超500万个，并依旧呈上升趋势。 在这样的背景下，谁不想跟一波风，写几个小程序的bug">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手把手教你从零上线小程序+Node.js服务端 (上)">
+<meta property="og:url" content="zhaji.com/mini-demo1/index.html">
+<meta property="og:site_name" content="炸鸡的Blog">
+<meta property="og:description" content="一、引言与准备17年微信小程序正式发布后，凭借其无需安装、触手可及、用完即走的优势爆火。至今依旧处于火热状态，不仅如此，小程序生态圈也在不断扩大，除了微信，各大主流app都安排上了自己的小程序，比如百度、支付宝、淘宝等。 据统计，至20年上半年，微信小程序数量已超320万，是所有平台中占比最高的；全网小程序累积已超500万个，并依旧呈上升趋势。 在这样的背景下，谁不想跟一波风，写几个小程序的bug">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599380960820-807f4823-56c6-4004-816e-2b4358ce764c.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599491617850-803b601f-0964-452f-a3d5-509a18f51644.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599577731728-02a5e523-656c-4c1b-9afd-50ebf897ebc7.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599578525385-90832e4e-931a-49b6-b7b7-d73d9861457e.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600100418277-64e4a689-c1b3-441d-8495-1bcfb2927ac1.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599580359673-17ff99d2-74b9-4137-ad4d-3954d70beb16.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600098072982-206752ce-c6bc-4af7-b462-fec26aee34da.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599879640542-01c69146-8a95-4271-ac93-fde6a99fe469.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599879755547-f6b45950-2e19-4fa0-81ce-25131c875820.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599879933965-4256a5e1-3b2a-42b4-acc9-9104e3dde0d0.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599880026275-b22d3276-3391-4032-a319-c62550c2615c.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599884341013-eaa96f50-6d5b-45f0-adc9-0cb94f563ec2.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599889182678-2e102c48-aa89-4eff-8a23-1983ca5b7a1e.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599893742214-94844d15-50b8-4116-89d9-d8b937038af6.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599893840434-900849a4-6ad4-425c-9cca-07d4f444414f.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599894330842-068e0bff-f45d-4bb6-80cb-abbd94647ede.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599895080875-8f3613ac-36c3-4898-9c9f-6843d823570c.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599895262917-436a3a00-6ebf-4f82-a725-0c783e34e771.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599895284116-59d6921b-f88b-4516-916c-5fed86723a47.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599895299418-d1f6adad-7a38-467a-87a8-eaef3734e3f3.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599899947959-123383ef-0102-404d-964a-632516f5483b.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599900638126-5bf50cc5-103d-4aa9-8133-58d5880c5421.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599900750597-813feb76-58d3-4808-9f05-a37a141cdf27.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599910110499-d5e036f4-b6be-4849-a357-634378be2c1d.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599910119264-d33638d0-f8b7-42af-b74c-3c5367473640.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599912025959-e28f2775-a673-434f-bacf-73068466db01.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599961760894-145e0bfd-b42d-4040-b68d-e7f2d7865181.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599961741741-2367aa9b-8f95-4c19-855d-fbc3eb8344d8.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599962590734-5e24bd76-7d48-4c9a-8b54-145015df7468.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600093719877-ce6fc6e2-c277-466f-b419-0d6ef4489f2e.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600093889053-5f437436-444d-4dec-9d74-b62d7b5fe007.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600096633510-3f5b16ff-ab48-4685-bc87-98c8978074e1.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600177492684-5be40728-db6f-4817-a08d-6fc81ecc9845.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600177686467-21ae7603-7c0c-4012-8407-bf1f64e652d4.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600177776753-74f35d19-8bcc-430f-aa53-d1d0fe360021.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600179278481-e14623e0-5c9f-445b-b7f7-cb9101578ca4.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600179199539-dbd80329-a51b-402a-86ec-780dfa669a15.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600179429319-9de158d6-c63b-4e93-996e-30d2c1b1d29f.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600182247061-06114177-1e34-4d3a-bcaf-f9d9f90339ca.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600182995589-3745aa6a-a3e4-46b1-b058-a782f8d9577a.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600183271993-d7b17469-5a78-4eb4-881a-369f3c933d5d.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1601216768372-b914f993-225e-427b-8fce-e80ec37b18cf.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:updated_time" content="2020-09-28T15:22:48.294Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="手把手教你从零上线小程序+Node.js服务端 (上)">
+<meta name="twitter:description" content="一、引言与准备17年微信小程序正式发布后，凭借其无需安装、触手可及、用完即走的优势爆火。至今依旧处于火热状态，不仅如此，小程序生态圈也在不断扩大，除了微信，各大主流app都安排上了自己的小程序，比如百度、支付宝、淘宝等。 据统计，至20年上半年，微信小程序数量已超320万，是所有平台中占比最高的；全网小程序累积已超500万个，并依旧呈上升趋势。 在这样的背景下，谁不想跟一波风，写几个小程序的bug">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1599380960820-807f4823-56c6-4004-816e-2b4358ce764c.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: false,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="zhaji.com/mini-demo1/">
+
+
+
+
+
+  <title>手把手教你从零上线小程序+Node.js服务端 (上) | 炸鸡的Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">炸鸡的Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="zhaji.com/mini-demo1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="炸鸡">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="炸鸡的Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">手把手教你从零上线小程序+Node.js服务端 (上)</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-28T23:18:21+08:00">
+                2020-09-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一、引言与准备"><a href="#一、引言与准备" class="headerlink" title="一、引言与准备"></a>一、引言与准备</h1><p>17年微信小程序正式发布后，凭借其无需安装、触手可及、用完即走的优势爆火。至今依旧处于火热状态，不仅如此，小程序生态圈也在不断扩大，除了微信，各大主流app都安排上了自己的小程序，比如百度、支付宝、淘宝等。</p>
+<p>据统计，至20年上半年，微信小程序数量已超320万，是所有平台中占比最高的；全网小程序累积已超500万个，并依旧呈上升趋势。</p>
+<p>在这样的背景下，谁不想跟一波风，写几个小程序的bug呢。</p>
+<p>本教程分为上下两章。第一章主要介绍本地开发与联调，你将了解到：</p>
+<ul>
+<li><p>基本的全栈开发过程</p>
+</li>
+<li><ul>
+<li>数据库设计</li>
+<li>小程序开发</li>
+<li>服务端开发</li>
+<li>本地联调</li>
+</ul>
+</li>
+</ul>
+<p>第二章主要介绍上线，你将了解到：</p>
+<ul>
+<li>小程序与服务端的上线</li>
+<li>域名与https配置</li>
+</ul>
+<p>整个过程中最重要的是：</p>
+<ul>
+<li>扩宽知识面（知道有这些工具可以用来做这些事情）</li>
+<li>解决问题能力</li>
+<li>阅读第一手资料的能力</li>
+<li>学习总结能力</li>
+</ul>
+<p>这是<a href="https://github.com/LiZhaji/mini_demo" target="_blank" rel="noopener">小程序+服务端</a>的代码地址。</p>
+<h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><p>小程序代码跟前端类似，所以有前端基础的朋友会更容易上手和理解。</p>
+<p>开始阅读之前，确保你本地电脑已有Node.js + Git 环境。</p>
+<p>请使用以下方式检测，如果没有显示版本号，建议阅读<a href="https://www.cnblogs.com/xinaixia/p/8279015.html" target="_blank" rel="noopener">Windows-Node.js安装与配置</a> 、<a href="https://blog.csdn.net/huangqqdy/article/details/83032408?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.channel_param&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.channel_param" target="_blank" rel="noopener">Git安装与配置</a>先进行安装与配置。</p>
+<h1 id><a href="#" class="headerlink" title></a><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599380960820-807f4823-56c6-4004-816e-2b4358ce764c.png" alt="image.png"></h1><p>其次，编译器准备：</p>
+<ul>
+<li>小程序：<a href="https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html" target="_blank" rel="noopener">微信开发者工具</a> （下载完就先放着，第三章会用到）</li>
+<li>Node.js：VS Code / WebStorm … </li>
+</ul>
+<p>最后，先让大家有个了解，本教程将会使用的技术栈如下：</p>
+<ul>
+<li>微信小程序原生语法 + weui-wess </li>
+<li>后端 Node.js （express）</li>
+<li>数据库 MySQL</li>
+<li>线上数据库 phpMyadmin</li>
+</ul>
+<p>如果你纠结先写后端还是先实现页面，那就按照本文步骤来吧。再简单的全栈开发，也是需要踩坑的~</p>
+<h1 id="二、数据库设计-MySQL"><a href="#二、数据库设计-MySQL" class="headerlink" title="二、数据库设计-MySQL"></a>二、数据库设计-MySQL</h1><p>为什么第一步是设计数据库呢？</p>
+<p>因为数据库设计要求我们了解自己的产品，让我们知道在做什么。</p>
+<p>比如页面的数据从哪儿来，到哪儿去；哪些数据需要抽象成事物存储到数据库，每个事物使用哪些信息去描述，这些都是在编码之前要设计好的东西，否则很有可能带来频繁修改代码的后果。</p>
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>我使用的本地数据库是<a href="https://dev.mysql.com/downloads/" target="_blank" rel="noopener">MySQL</a>，它有个可视化工作区叫<a href="https://dev.mysql.com/downloads/workbench/" target="_blank" rel="noopener">MySQLWorkbench</a>，长这样，使用起来很方便。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599491617850-803b601f-0964-452f-a3d5-509a18f51644.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>如果你没使用过MySQL，那就继续阅读，接下来将会说明如何使用它创建数据库。如果你会使用并且已经设计创建好自己的数据库了，那就开始阅读下一章吧。</p>
+<p>如果你还没有这些环境，就进入上面的链接先去下载吧，有不清楚的自行搜索教程。</p>
+<h2 id="创建数据库"><a href="#创建数据库" class="headerlink" title="创建数据库"></a>创建数据库</h2><p>当你下载完MySQL并且出现以上界面的时候，就可以继续跟着我的步骤走了。</p>
+<ul>
+<li>\1. 新建数据库 在SCHEMAS区域右键，选择<code>Create Schema</code></li>
+<li>\2. 为你的schema起一个名字</li>
+<li>\3. Apply 执行对应的SQL语句</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599577731728-02a5e523-656c-4c1b-9afd-50ebf897ebc7.png" alt="image.png"></p>
+<h2 id="创建表格"><a href="#创建表格" class="headerlink" title="创建表格"></a>创建表格</h2><h3 id="普通表格"><a href="#普通表格" class="headerlink" title="普通表格"></a>普通表格</h3><p>这时可以看到左侧的SCHEMAS中多了我们新建的数据库</p>
+<ul>
+<li>\4. 双击选择到该数据库，这一步不要漏掉，否则后面执行SQL语句会报错</li>
+<li>\5. Tables区域右键，选择<code>Create Table</code></li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599578525385-90832e4e-931a-49b6-b7b7-d73d9861457e.png" alt="image.png"></p>
+<p>此时弹出new_table的表格，你需要</p>
+<ul>
+<li>\6. 为你的表起一个名字</li>
+<li>\7. 为你的表添加描述信息</li>
+</ul>
+<p>这里我添加了一张用户表user，用来存储用户信息，包括了id（PK表示主键primary key，NN表示不允许为空not null，AI表示自增auto increasement，其余自行搜索）、openid（openid是微信向开发人员提供的用户标识，这里知道即可）、createTime 创建时间。因为仅做demo，所以只存储2个字段了，你可以根据自己的想法进行设计。</p>
+<ul>
+<li>\8. Apply 执行创建user表</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600100418277-64e4a689-c1b3-441d-8495-1bcfb2927ac1.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<h3 id="带有外键的表格"><a href="#带有外键的表格" class="headerlink" title="带有外键的表格"></a>带有外键的表格</h3><ul>
+<li>\9. 创建一张带有外键的表格</li>
+</ul>
+<p>与普通表一样，先创建完所有字段。这里我创建了advice的表格，包含id、content和userId三个字段，其中userId为外键，关联user表中的id字段。</p>
+<ul>
+<li><ul>
+<li>9.1 选择<code>Foreign Keys</code></li>
+<li>9.2 为你的外键起一个名字</li>
+<li>9.3 选择需要外键的关联表</li>
+<li>9.4 选择需要本表中的外键字段</li>
+<li>9.5 选择关联表中的被关联的字段</li>
+<li>9.6 当被关联字段更新或删除的时候，关联表中字段如何处理。CASCADE表示级联，SET NULL表示设置为空。这里的意思就是当user表中的某个id变化的时候，关联它的外键也一起变化，id被删除的时候，关联它的外键就会变成null。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599580359673-17ff99d2-74b9-4137-ad4d-3954d70beb16.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<h2 id="创建完毕"><a href="#创建完毕" class="headerlink" title="创建完毕"></a>创建完毕</h2><p>此时，我己经创建完了我的数据库mini_demo，有两张表格，advice和user，其中advice的userId为外键，关联user表中的id。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600098072982-206752ce-c6bc-4af7-b462-fec26aee34da.png" alt="image.png"></p>
+<p>如果你还没完成，就先创建完吧；如果你已经完成，开始阅读下一章吧。</p>
+<h1 id="三、小程序注册与编码"><a href="#三、小程序注册与编码" class="headerlink" title="三、小程序注册与编码"></a>三、<strong>小程序注册与编码</strong></h1><h2 id="注册账号"><a href="#注册账号" class="headerlink" title="注册账号"></a>注册账号</h2><p>小程序与公众号类似，需要使用账号管理。如果没有账号，先去<a href="https://mp.weixin.qq.com/wxopen/waregister?action=step1" target="_blank" rel="noopener">平台</a>申请一个，然后登录。</p>
+<ol>
+<li>需要使用邮箱登录，一个邮箱只能绑定一个小程序。</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599879640542-01c69146-8a95-4271-ac93-fde6a99fe469.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<ol>
+<li>登录到邮箱，点击链接以激活</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599879755547-f6b45950-2e19-4fa0-81ce-25131c875820.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<ol>
+<li>填写信息，需登记本人真实信息。一个身份证号目前可以绑定五个小程序。</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599879933965-4256a5e1-3b2a-42b4-acc9-9104e3dde0d0.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<ol>
+<li>然后，很自然得跳转到这个页面。按照页面提示的流程，填写小程序信息，填写完后将显示如下界面。</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599880026275-b22d3276-3391-4032-a319-c62550c2615c.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599884341013-eaa96f50-6d5b-45f0-adc9-0cb94f563ec2.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<ol>
+<li>在菜单开发-开发设置里可以看到我们的小程序id，跟身份证一样，AppID是小程序的唯一标识。之后很多地方都会用到。</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599889182678-2e102c48-aa89-4eff-8a23-1983ca5b7a1e.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<h2 id="新建项目"><a href="#新建项目" class="headerlink" title="新建项目"></a>新建项目</h2><p>这时候打开前一章下载完的微信开发者工具，微信扫码登录后，就会出现此页面，让我们新建一个小程序项目吧。你需要</p>
+<ol>
+<li>起一个项目名字</li>
+<li>选择存放目录</li>
+<li>输入刚刚的AppID</li>
+<li>点击不使用云服务，我们使用自己搭建的后端服务。</li>
+</ol>
+<p>如果仅是为了完成小程序功能，可以选择更快捷的方式。这里是为了学习如何上线后端服务及云存储。</p>
+<ol>
+<li>新建</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599893742214-94844d15-50b8-4116-89d9-d8b937038af6.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>稍等片刻，我们的第一个小程序便诞生了！如下图所示。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599893840434-900849a4-6ad4-425c-9cca-07d4f444414f.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<h2 id="熟悉项目"><a href="#熟悉项目" class="headerlink" title="熟悉项目"></a>熟悉项目</h2><p>先介绍一下常用的界面区域和按钮，见图。（不理解也没关系，这些都是熟能生巧的，现在做到心中有数就行。）</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599894330842-068e0bff-f45d-4bb6-80cb-abbd94647ede.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>相信这时你已经在模拟器上都点过一遍了，这里再给大家梳理一下。</p>
+<ul>
+<li>初始页面，有一个按钮和欢迎语。</li>
+<li>点击获取头像昵称后，跳出一个授权弹窗。</li>
+<li>允许之后，初始页面的按钮变为了用户信息。</li>
+<li>点击头像跳转到另一个页面，可以查看启动日志。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599895080875-8f3613ac-36c3-4898-9c9f-6843d823570c.png" alt="image.png">)<img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599895262917-436a3a00-6ebf-4f82-a725-0c783e34e771.png" alt="image.png">)<img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599895284116-59d6921b-f88b-4516-916c-5fed86723a47.png" alt="image.png">)<img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599895299418-d1f6adad-7a38-467a-87a8-eaef3734e3f3.png" alt="image.png"></p>
+<p>接下来，思考这两个问题。</p>
+<p>既然有两个页面，为什么初始页面是第一个呢，在哪控制？</p>
+<p>每个类型文件是干嘛用的，数据如何展示？</p>
+<p>如果你存在疑惑，请先阅读<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/quickstart/code.html" target="_blank" rel="noopener">官文-小程序代码构成</a>，开始编码前，我们务必先了解这些东西。</p>
+<h3 id="初始化页面分析"><a href="#初始化页面分析" class="headerlink" title="初始化页面分析"></a>初始化页面分析</h3><p>这时你对小程序代码构成有了初步了解，甚至已经动手改过代码了，很棒。</p>
+<p>接下里分析一下两个页面的逻辑及实现。</p>
+<p>回到刚才的问题，为什么初始页面是第一个呢。</p>
+<p>其实是由<code>app.json</code>的<code>pages</code>决定的，第一行就是要初始化展示的界面。</p>
+<p>小程序初始化后，会首先触发<code>app.js</code>的<code>onLaunch</code> 方法，会在小程序启动时触发</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599899947959-123383ef-0102-404d-964a-632516f5483b.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>这里面做了三步操作：</p>
+<ol>
+<li>记录本次启动时间，存入本地<code>storage</code>的<code>logs</code> 变量，该数据是logs页面的数据来源</li>
+<li>登录，这里需要自己补充</li>
+<li>获取用户信息。如果用户已授权过用户信息，那么这些信息可以直接通过<code>wx.getUserInfo</code>获取到，获取成功后保存到全局变量<code>userInfo</code> 中</li>
+</ol>
+<p>然后，启动初始化页面，也就是<code>index</code>。 <code>index.js</code>中有个<code>onLoad</code>方法 (该方法会在页面加载时触发，详见<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/page-life-cycle.html" target="_blank" rel="noopener">页面生命周期</a>) ，主要就是判断是否已获取到用户信息，有的话就赋值给当前页面的data，没有就设置回调，等有了之后再赋值。最后一个else是没有“获取用户按钮”的兼容处理。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599900638126-5bf50cc5-103d-4aa9-8133-58d5880c5421.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>另外两个函数<code>bindViewTap</code>和<code>getUserInfo</code>是事件绑定函数，分别是点击头像和点击按钮的回调。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bindViewTap<span class="string">` 就做了一件事，让页面跳转到`</span>logs</span><br></pre></td></tr></table></figure>
+
+<p><code>getUserInfo</code> 将获取到的用户信息存储到全局变量和当前页面data中。e是通过参数透传实现的，由小程序API返回。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599900750597-813feb76-58d3-4808-9f05-a37a141cdf27.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p><code>logs</code>页面很简单，就是把启动信息从本地storage中取出来展示。</p>
+<h2 id="编码"><a href="#编码" class="headerlink" title="编码"></a>编码</h2><p>看到这儿，你或许对小程序代码有大概了解了，那么接下来就照葫芦画瓢，去写自己的页面吧（登录会在下一章讲，不着急实现）</p>
+<p>编码过程中，可以预先定义好接口，变量结构和名称就根据前一章设计好的数据库来写，避免重复修改。</p>
+<p>页面中涉及到的很多小程序API，不清楚的就去<a href="https://developers.weixin.qq.com/miniprogram/dev/api/" target="_blank" rel="noopener">微信小程序API文档</a>查，大家要有看第一手资料的意识和能力。</p>
+<p>这是<a href="https://github.com/LiZhaji/mini_demo/tree/master/MiniPrograms" target="_blank" rel="noopener">我的小程序代码地址</a>（下面有页面截图），仅供参考。</p>
+<h1 id="四、服务端搭建-Koa"><a href="#四、服务端搭建-Koa" class="headerlink" title="四、服务端搭建-Koa"></a>四、<strong>服务端搭建-Koa</strong></h1><h2 id="接口准备"><a href="#接口准备" class="headerlink" title="接口准备"></a>接口准备</h2><p>看这节之前，你应该实现了自己的静态页面了。这是我当前的两个页面，很简单。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599910110499-d5e036f4-b6be-4849-a357-634378be2c1d.png" alt="image.png">)<img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599910119264-d33638d0-f8b7-42af-b74c-3c5367473640.png" alt="image.png"></p>
+<p>总共涉及两个接口，登录和提交建议。</p>
+<p>在写服务端之前，先约定好接口，如路径、请求方法、参数。</p>
+<ul>
+<li>登录 get /login?js_code</li>
+<li>提交建议 post /addAdvice body={openid, advice}</li>
+</ul>
+<h2 id="hello-world"><a href="#hello-world" class="headerlink" title="hello world"></a>hello world</h2><p>明确接口之后，开始编写服务端，我使用的是Node.js框架Koa。</p>
+<p>首先，创建一个空文件夹，从终端进入目录，执行下面两个命令</p>
+<p><code>npm init</code> 初始化npm信息，生成package.json</p>
+<p><code>npm i koa</code> 下载koa框架</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599912025959-e28f2775-a673-434f-bacf-73068466db01.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>这时我们的目录下有三个文件：node_modules、package.json、package-lock.json</p>
+<p>根据<a href="https://koa.bootcss.com/" target="_blank" rel="noopener">Koa文档</a>，我们先写一个最简单的demo</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">'koa'</span>)</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa()</span><br><span class="line"></span><br><span class="line">app.use(<span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">  ctx.body = <span class="string">'hello zhaji'</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>)</span><br></pre></td></tr></table></figure>
+
+<p>然后命令行执行这个文件<code>node index</code> 仿佛什么都没有，但实际上项目已经启动起来了，<a href="http://localhost:3000/" target="_blank" rel="noopener">http://localhost:3000/</a> 就能访问到。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599961760894-145e0bfd-b42d-4040-b68d-e7f2d7865181.png" alt="image.png">)<img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599961741741-2367aa9b-8f95-4c19-855d-fbc3eb8344d8.png" alt="image.png"></p>
+<p>所以我们可以在相应的地方加上提示。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">app.listen(<span class="number">3000</span>)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`项目已启动，地址为 http://127.0.0.1:3000`</span>);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1599962590734-5e24bd76-7d48-4c9a-8b54-145015df7468.png" alt="image.png"></p>
+<p>到此为止，我们已经能够启动Koa项目了，接下来就是写接口以及对接数据库。</p>
+<h2 id="提供接口"><a href="#提供接口" class="headerlink" title="提供接口"></a>提供接口</h2><p>也就是上面定义的两个接口，登录和提交建议</p>
+<p>接口需要路径，我们使用<a href="https://github.com/ZijianHe/koa-router" target="_blank" rel="noopener">koa-router</a></p>
+<p>先写一个koa-router的hello world，甚至直接从文档拷下来就行。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Koa = <span class="built_in">require</span>(<span class="string">"koa"</span>);</span><br><span class="line"><span class="keyword">const</span> app = <span class="keyword">new</span> Koa();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Router = <span class="built_in">require</span>(<span class="string">"koa-router"</span>);</span><br><span class="line"><span class="keyword">const</span> router = <span class="keyword">new</span> Router();</span><br><span class="line"></span><br><span class="line"><span class="comment">// app.use(async ctx =&gt; &#123;</span></span><br><span class="line"><span class="comment">//   ctx.body = 'hello zhaji'</span></span><br><span class="line"><span class="comment">// &#125;)</span></span><br><span class="line"></span><br><span class="line">router.get(<span class="string">"/"</span>, <span class="keyword">async</span> (ctx) =&gt; &#123;</span><br><span class="line">  ctx.body = <span class="string">"hello zhaji"</span>;</span><br><span class="line">&#125;);</span><br><span class="line">app.use(router.routes()).use(router.allowedMethods());</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`项目已启动，地址为 http://127.0.0.1:3000`</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="get请求"><a href="#get请求" class="headerlink" title="get请求"></a>get请求</h3><p>接下来，实现自己的接口。先讲一下登录，也就是根据jscode获取用户唯一标识。</p>
+<p><a href="https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/login/auth.code2Session.html" target="_blank" rel="noopener">官网</a>是这样描述的：</p>
+<blockquote>
+<p>登录凭证校验。通过 <a href="https://developers.weixin.qq.com/miniprogram/dev/api/open-api/login/wx.login.html" target="_blank" rel="noopener">wx.login</a> 接口获得临时登录凭证 code 后传到开发者服务器调用此接口完成登录流程。更多使用方法详见 <a href="https://developers.weixin.qq.com/miniprogram/dev/framework/open-ability/login.html" target="_blank" rel="noopener">小程序登录</a>。</p>
+<p>请求地址 GET </p>
+<p><a href="https://api.weixin.qq.com/sns/jscode2session？appid=APPID&amp;secret=SECRET&amp;js_code=JSCODE&amp;grant_type=authorization_code" target="_blank" rel="noopener">https://api.weixin.qq.com/sns/jscode2session？appid=APPID&amp;secret=SECRET&amp;js_code=JSCODE&amp;grant_type=authorization_code</a></p>
+</blockquote>
+<p>我们要做的其实很简单，在后台向这个地址发送请求，携带三个参数，然后保存返回信息即可。</p>
+<p>三个参数分别是appid 之前新建小程序项目也用到过的那个、secret 需要下载的密钥<a href="https://mp.weixin.qq.com/wxamp/devprofile/get_profile" target="_blank" rel="noopener">下载链接</a>、js_code 小程序登录接口wx.login返回信息之一</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600093719877-ce6fc6e2-c277-466f-b419-0d6ef4489f2e.png" alt="image.png"></p>
+<p>通过这个方法得到三个值后，我们可以先测试一下。复制<strong>已经修改为你自己的信息的链接</strong>到浏览器，能看到返回的信息，说明接口没问题。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600093889053-5f437436-444d-4dec-9d74-b62d7b5fe007.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p><a href="https://www.npmjs.com/package/node-fetch" target="_blank" rel="noopener">node-fetch</a>可以帮助我们在node.js下发起请求。为了符合关注点分离，我们将接口和数据库操作分离。</p>
+<p>在<code>index.js</code>下新增<code>/login</code>接口</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 登录</span></span><br><span class="line">router.get(<span class="string">'/login'</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123;js_code&#125; = ctx.query</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> api.login(js_code)</span><br><span class="line">  ctx.body = res</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>在<code>api/index.js</code>做具体实现。说明一下第6行<code>const { APPID, SECRET } = process.env</code> 这样写的目的是可以从命令行中获取项目的私密信息，避免把信息暴露在项目中。启动格式<code>export APPID=&quot;xxx&quot; &amp;&amp; export SECRET=&quot;xxx&quot; &amp;&amp; node index.js</code></p>
+<p>之后的数据库名和密码也可以用这样的方式启动。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// api/index.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> fetch = <span class="built_in">require</span>(<span class="string">"node-fetch"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getOpenId</span>(<span class="params">JSCODE </span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; APPID, SECRET &#125; = process.env;</span><br><span class="line">  <span class="built_in">console</span>.log(APPID, SECRET);</span><br><span class="line">  <span class="keyword">const</span> api = <span class="string">`https://api.weixin.qq.com/sns/jscode2session?appid=<span class="subst">$&#123;APPID&#125;</span>&amp;secret=<span class="subst">$&#123;SECRET&#125;</span>&amp;js_code=<span class="subst">$&#123;JSCODE&#125;</span>&amp;grant_type=authorization_code`</span>;</span><br><span class="line">  <span class="keyword">return</span> fetch(api)</span><br><span class="line">    .then(<span class="function">(<span class="params">res</span>) =&gt;</span> res.json())</span><br><span class="line">    .then(<span class="function">(<span class="params">json</span>) =&gt;</span> json);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="keyword">async</span> login(JSCODE) &#123;</span><br><span class="line">    <span class="comment">// 1. 获取openid</span></span><br><span class="line">    <span class="keyword">const</span> openid = <span class="keyword">await</span> getOpenId(JSCODE)</span><br><span class="line">    <span class="keyword">return</span> openids</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 根据openid读取数据库，返回用户信息</span></span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>重启项目后，用浏览器测试一下接口好用不。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600096633510-3f5b16ff-ab48-4685-bc87-98c8978074e1.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>虽然返回的是错误码说明js_code无效，但也已经说明我们的login接口可以使用了。</p>
+<h3 id="post请求"><a href="#post请求" class="headerlink" title="post请求"></a>post请求</h3><p>post请求的数据通常放在body里，但如果直接<code>ctx.request.body</code>读取其实为空，所以需要借助<code>koa-bodyparser</code>库，像这样使用。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">"koa-bodyparser"</span>);</span><br><span class="line">app.use(bodyParser());</span><br><span class="line"></span><br><span class="line">router.post(<span class="string">'/addAdvice'</span>, <span class="keyword">async</span> ctx =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> data = ctx.request.body</span><br><span class="line">  <span class="built_in">console</span>.log(data)</span><br><span class="line">  ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h2><p>使用<a href="https://sequelize.org/master/" target="_blank" rel="noopener">sequelize</a>进行数据库连接。我们连接本地数据库进行调试，先确保本地数据库已启动。</p>
+<p>然后进行数据库配置，新建<code>config.js</code>文件，配置数据库名称、用户名和密码。其余配置大同小异，基本上也不需要修改，<a href="https://github.com/LiZhaji/mini_demo/blob/master/service_koa/config.js#L14" target="_blank" rel="noopener">代码仓库</a>里详细说明，感兴趣同学可以看看。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// config.js</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">// 数据库名称</span></span><br><span class="line">  database: process.env.DATABASE,</span><br><span class="line">  <span class="comment">// 用户名</span></span><br><span class="line">  username: process.env.USER,</span><br><span class="line">  <span class="comment">// 密码</span></span><br><span class="line">  password: process.env.PWD,</span><br><span class="line">  <span class="comment">// 地址</span></span><br><span class="line">  host: <span class="string">'127.0.0.1'</span>,</span><br><span class="line">  <span class="comment">// 使用什么数据库</span></span><br><span class="line">  dialect: <span class="string">'mysql'</span>,</span><br><span class="line"></span><br><span class="line">  ...</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后新建<code>mysql/index.js</code> 主要作用就是声明表格、表格属性以及表格之前的关系。数据库有几张表格，就应该有多少个类。（应该支持导入导出操作避免手工劳动力，有兴趣的朋友的研究下。）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mysql/index.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Sequelize = <span class="built_in">require</span>(<span class="string">"sequelize"</span>);</span><br><span class="line"><span class="keyword">const</span> mysqlConfig = <span class="built_in">require</span>(<span class="string">"../config"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> sequelize = <span class="keyword">new</span> Sequelize(mysqlConfig);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Model = Sequelize.Model;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span> <span class="keyword">extends</span> <span class="title">Model</span> </span>&#123;&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Advice</span> <span class="keyword">extends</span> <span class="title">Model</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">User.init(</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">// 属性</span></span><br><span class="line">    id: &#123;</span><br><span class="line">      type: Sequelize.INTEGER, <span class="comment">// 要与数据库声明的类型匹配</span></span><br><span class="line">      autoIncrementIdentity: <span class="literal">true</span>, <span class="comment">// 自增</span></span><br><span class="line">      primaryKey: <span class="literal">true</span>, <span class="comment">// 主键</span></span><br><span class="line">    &#125;,</span><br><span class="line">    openid: &#123;</span><br><span class="line">      type: Sequelize.STRING,</span><br><span class="line">      allowNull: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    createTime: &#123;</span><br><span class="line">      type: Sequelize.DATE,</span><br><span class="line">      allowNull: <span class="literal">true</span>,</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    sequelize,</span><br><span class="line">    modelName: <span class="string">"user"</span>,</span><br><span class="line">    <span class="comment">// 参数</span></span><br><span class="line">  &#125;</span><br><span class="line">);</span><br><span class="line">Advice.init(</span><br><span class="line">  &#123;</span><br><span class="line">    id: &#123;</span><br><span class="line">      type: Sequelize.INTEGER,</span><br><span class="line">      autoIncrementIdentity: <span class="literal">true</span>,</span><br><span class="line">      primaryKey: <span class="literal">true</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    content:&#123;</span><br><span class="line">      type: Sequelize.TEXT,</span><br><span class="line">      allowNull: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    userId: &#123;</span><br><span class="line">      type: Sequelize.INTEGER,</span><br><span class="line">      references: &#123; <span class="comment">// 外键声明</span></span><br><span class="line">        model: <span class="string">"user"</span>,</span><br><span class="line">        key: <span class="string">"id"</span>,</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    sequelize,</span><br><span class="line">    modelName: <span class="string">"advice"</span>,</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  User,</span><br><span class="line">  Advice,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>那么，如何操作放佛已经被对象化的表格呢？这就是<code>sequelize</code> 特色之处，它让开发者能够像写中文一样去操作数据库。比如，新增和查找，分别是<code>create</code>和<code>findOne</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// api/index.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; User, Advice &#125; = <span class="built_in">require</span>(<span class="string">"./mysql/index.js"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 新增用户</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">addUser</span>(<span class="params">openid</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">await</span> User.create(&#123; openid, <span class="attr">createTime</span>: <span class="keyword">new</span> <span class="built_in">Date</span>().toLocaleString() &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查找用户</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">getUser</span>(<span class="params">openid</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> user = <span class="keyword">await</span> User.findOne(&#123; <span class="attr">where</span>: &#123; openid &#125; &#125;);</span><br><span class="line">  <span class="comment">// 用户不存在，新增用户</span></span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="keyword">return</span> user;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="一些报错"><a href="#一些报错" class="headerlink" title="一些报错"></a>一些报错</h3><p>在执行过程中，项目总会报错的。报错不要紧，要紧的是我们解决它的能力。刚开始学的时候，项目一报错我就复制到度娘下，甚至嫌麻烦都懒得看一眼。渐渐的发现，其实很多问题自己就能看明白，不要太依赖搜索等，尽量先尝试自己解决，只有这样才能熟能生巧。没错，写代码就是一个熟能生巧的过程。</p>
+<p>比如这里，写完增删改查后，准备启动项目，却发现报了个这样错。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600177492684-5be40728-db6f-4817-a08d-6fc81ecc9845.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>很明显引入的路径有问题，应该是<code>../mysql/index.js</code></p>
+<p>再启动，又报错。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600177686467-21ae7603-7c0c-4012-8407-bf1f64e652d4.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>让我们下载mysql2依赖包，那就下呗。下完之后再启动，ok了。其实这种自己慢慢把一个个bug干掉的过程，很爽的。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600177776753-74f35d19-8bcc-430f-aa53-d1d0fe360021.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<h2 id="调试接口"><a href="#调试接口" class="headerlink" title="调试接口"></a>调试接口</h2><p>到这里我们写好了接口并成功启动项目，接下来就是调试阶段，看看接口是否可用。</p>
+<p>调试方法有很多种，最简单的可以直接用浏览器调试，get请求直接浏览器打开，post请求可以写一个xhr脚本；</p>
+<p>也使用<a href="https://www.postman.com/" target="_blank" rel="noopener">postman</a>工具，专门用来测接口的。</p>
+<p>我们选用postman测试，如果没有该工具，可以点击上面的超链接进行下载并登录。</p>
+<p>同样，从最简单的开始。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600179278481-e14623e0-5c9f-445b-b7f7-cb9101578ca4.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>没问题后，开始测登录接口，是否与预料中一致，若存在问题，看报错解决。（前面说过，js_code在小程序项目里登录wx.login时输出res.code一下就可以得到）</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600179199539-dbd80329-a51b-402a-86ec-780dfa669a15.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>没问题后，打开数据库确认。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600179429319-9de158d6-c63b-4e93-996e-30d2c1b1d29f.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>确保每个接口都没问题后，就可以跟小程序联调了！</p>
+<p><a href="https://github.com/LiZhaji/mini_demo/tree/master/service_koa" target="_blank" rel="noopener">这是我的服务端代码地址</a></p>
+<h1 id="五、本地联调"><a href="#五、本地联调" class="headerlink" title="五、本地联调"></a><strong>五、本地联调</strong></h1><h2 id="小程序接口请求"><a href="#小程序接口请求" class="headerlink" title="小程序接口请求"></a>小程序接口请求</h2><p>如果之前没在小程序里写接口，那就在这一步写吧。</p>
+<p>根据<a href="https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html" target="_blank" rel="noopener">文档</a>，我们使用<code>wx.request</code> 发送请求，下面是一个调用<code>login</code>接口的示例。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">wx.request(&#123;</span><br><span class="line">  url: <span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.globalData.baseUrl&#125;</span>/login`</span>, <span class="comment">// 在全局变量里定义baseUrl，方便之后修改</span></span><br><span class="line">  method: <span class="string">'GET'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    js_code: res.code</span><br><span class="line">  &#125;,</span><br><span class="line">  success: <span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(res);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>如果出现了这样的报错，只需要点击右上角详情，勾选<code>不校验...</code>即可。但如果小程序发布，其规定为了安全还是需要使用https，现在取消校验是为了本地联调。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600182247061-06114177-1e34-4d3a-bcaf-f9d9f90339ca.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600182995589-3745aa6a-a3e4-46b1-b058-a782f8d9577a.png" alt="image.png"></p>
+<h2 id="联调"><a href="#联调" class="headerlink" title="联调"></a>联调</h2><p>再次点击编译，接口正常运行并输出，同时可以再去数据库查看数据是否符合预期。<img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600183271993-d7b17469-5a78-4eb4-881a-369f3c933d5d.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>挨个把所有的接口都调试一遍。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>过了好一会儿，终于调试完了所有接口。恭喜你，离小程序上线又近了一大步！</p>
+<p>为了保证服务端接口能够被非本地访问（如使用其他电脑访问），下一步我们需要把它放到云上。</p>
+<p>欢迎关注我的其他账号～</p>
+<p>博客：<a href="http://blog.escript.cn/" target="_blank" rel="noopener">http://blog.escript.cn/</a></p>
+<p>掘金：猪是倒着读着</p>
+<p>知乎：猪是倒着读着</p>
+<p>公众号：炸鸡呀</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1601216768372-b914f993-225e-427b-8fce-e80ec37b18cf.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Contact</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/add_wechat.jpg" alt="炸鸡 欢迎联系作者～">
+        <p>欢迎联系作者～</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020_August/" rel="next" title="八月结">
+                <i class="fa fa-chevron-left"></i> 八月结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="炸鸡">
+            
+              <p class="site-author-name" itemprop="name">炸鸡</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/LiZhaji" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">炸鸡</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
