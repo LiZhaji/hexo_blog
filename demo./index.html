@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="原题今天签约群里一位嵌入式同学问了我一个面试题，还是踩坑了，代码如下 12345678910111213141516171819202122// 输出？function f1() &amp;#123;  var n = 1001  nAdd = function() &amp;#123;     n += 2   &amp;#125;  function f2() &amp;#123;    console.log(n)  &amp;#">
+<meta name="description" content="hello这是一个自动上传的demo">
 <meta property="og:type" content="article">
-<meta property="og:title" content="闭包面试题解析">
-<meta property="og:url" content="zhaji.com/closure/index.html">
+<meta property="og:title" content="炸鸡的Blog">
+<meta property="og:url" content="zhaji.com/demo./index.html">
 <meta property="og:site_name" content="炸鸡的Blog">
-<meta property="og:description" content="原题今天签约群里一位嵌入式同学问了我一个面试题，还是踩坑了，代码如下 12345678910111213141516171819202122// 输出？function f1() &amp;#123;  var n = 1001  nAdd = function() &amp;#123;     n += 2   &amp;#125;  function f2() &amp;#123;    console.log(n)  &amp;#">
+<meta property="og:description" content="hello这是一个自动上传的demo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-09-26T09:50:29.278Z">
+<meta property="og:updated_time" content="2020-10-08T09:40:27.509Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="闭包面试题解析">
-<meta name="twitter:description" content="原题今天签约群里一位嵌入式同学问了我一个面试题，还是踩坑了，代码如下 12345678910111213141516171819202122// 输出？function f1() &amp;#123;  var n = 1001  nAdd = function() &amp;#123;     n += 2   &amp;#125;  function f2() &amp;#123;    console.log(n)  &amp;#">
+<meta name="twitter:title" content="炸鸡的Blog">
+<meta name="twitter:description" content="hello这是一个自动上传的demo">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="zhaji.com/closure/">
+  <link rel="canonical" href="zhaji.com/demo./">
 
 
 
 
 
-  <title>闭包面试题解析 | 炸鸡的Blog</title>
+  <title> | 炸鸡的Blog</title>
   
 
 
@@ -252,7 +252,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="zhaji.com/closure/">
+    <link itemprop="mainEntityOfPage" href="zhaji.com/demo./">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="炸鸡">
@@ -269,7 +269,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">闭包面试题解析</h2>
+          <h2 class="post-title" itemprop="name headline"></h2>
         
 
         <div class="post-meta">
@@ -281,8 +281,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-22T18:46:40+08:00">
-                2019-10-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-08T17:40:27+08:00">
+                2020-10-08
               </time>
             
 
@@ -319,72 +319,7 @@
       
 
       
-        <h1 id="原题"><a href="#原题" class="headerlink" title="原题"></a>原题</h1><p>今天签约群里一位嵌入式同学问了我一个面试题，还是踩坑了，代码如下</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 输出？</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> n = <span class="number">1001</span></span><br><span class="line">  nAdd = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">    n += <span class="number">2</span> </span><br><span class="line">  &#125;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(n)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> f2</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> cacl1 = f1()</span><br><span class="line"><span class="keyword">var</span> cacl2 = f1()</span><br><span class="line"></span><br><span class="line">cacl1()</span><br><span class="line">cacl2()</span><br><span class="line"></span><br><span class="line">nAdd()</span><br><span class="line"></span><br><span class="line">cacl1()</span><br><span class="line">cacl2()</span><br></pre></td></tr></table></figure>
-
-<p>正确输出是（忽略换行）：1001 1001 1001 1003</p>
-<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>本道题中有几个点：</p>
-<ul>
-<li><code>nAdd</code>前无声明关键字，为全局变量</li>
-<li>闭包，作用域是定义的时候决定的</li>
-</ul>
-<p>why?<br>我们详解代码执行过程：</p>
-<ul>
-<li><p>执行Ln13： <code>var cacl1 = f1()</code></p>
-<ul>
-<li><p>f1函数预解析阶段</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> n = <span class="literal">undefined</span></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(n)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>f1函数执行完毕后</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// nAdd作用域链：nAdd本身 -&gt; 第一次执行的f1 -&gt; window</span></span><br><span class="line"><span class="keyword">var</span> nAdd = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">  n += <span class="number">2</span> </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// cacl1作用域链：f2 -&gt; 第一次执行的f1 -&gt; window</span></span><br><span class="line"><span class="keyword">var</span> cacl1 = f2()&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(n)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 这里是两个n都是f1中的n</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>Ln14： <code>var cacl2 = f1()</code></p>
-<ul>
-<li>f1函数预解析阶段<br>同第一次</li>
-<li>f1函数执行完毕后<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// nAdd作用域链：nAdd本身 -&gt; 第二次执行的f1 -&gt; window</span></span><br><span class="line">nAdd = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">  n += <span class="number">2</span> </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// cacl2作用域链：f2 -&gt; 第二次执行的f1 -&gt; window</span></span><br><span class="line"><span class="keyword">var</span> cacl2 = f2()&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(n)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// cacl1中的n和cacl2中的n是独立的</span></span><br><span class="line"><span class="comment">// nAdd被重新赋值，所以它跟cacl1的关系也没了，而是跟cacl2中的n为同一个</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-<li><p>Ln16： <code>cacl1()</code></p>
-<ul>
-<li><p>也就是执行：<code>console.log(n)</code></p>
-<p>它会沿着cacl1定义时创建的作用域链去寻找n，f2函数中没有，所以向外一层，在第一次执行的f1中找到了，该n为1001</p>
-</li>
-</ul>
-</li>
-<li><p>Ln17：<code>cacl2()</code></p>
-<ul>
-<li>沿作用域链在第二次执行的f1中找到了，n为1001</li>
-</ul>
-</li>
-<li><p>Ln19：<code>nAdd()</code></p>
-<ul>
-<li>执行：<code>n += 2</code><br>找到了第二次执行的f1中的n，赋值为1003</li>
-</ul>
-</li>
-<li><p>Ln21：<code>cacl1()</code></p>
-<ul>
-<li>沿作用域链在第一次执行的f1中找到了，n为1001</li>
-</ul>
-</li>
-<li><p>Ln22：<code>cacl2()</code></p>
-<ul>
-<li>沿作用域链在第二次执行的f1中找到了，n为1003</li>
-</ul>
-</li>
-</ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
-<li><p>闭包：一个函数有权读取另一个函数的作用域下的变量。是定义的时候决定的。</p>
-</li>
-<li><p>作用域也是定义的时候决定的</p>
-</li>
-<li><p>函数中定义的全局变量，不会在预解析阶段提前（因为没有var，也不是函数声明），只有第一次执行完该函数的这一行时，才会在全局变量中出现</p>
-</li>
-<li><p>仔细/小心/谨慎</p>
-</li>
-</ul>
+        <h1 id="hello"><a href="#hello" class="headerlink" title="hello"></a>hello</h1><p>这是一个自动上传的demo</p>
 
       
     </div>
@@ -433,8 +368,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/deploy_project_server1/" rel="next" title="前端项目部署到阿里云 serve运行(1)">
-                <i class="fa fa-chevron-left"></i> 前端项目部署到阿里云 serve运行(1)
+              <a href="/demo/" rel="next" title="demo">
+                <i class="fa fa-chevron-left"></i> demo
               </a>
             
           </div>
@@ -442,10 +377,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/five_in_row/" rel="prev" title="五子棋之面对面下棋">
-                五子棋之面对面下棋 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
