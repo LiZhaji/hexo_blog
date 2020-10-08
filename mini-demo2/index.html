@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/avatar.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Web, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="六、搭建线上数据库也就是把我们的本地数据库到服务器上照搬一套。 第一步，下载mysql 第二步，利用phpMyAdmin 实现网页可视化数据库，方便查看和管理 LNMP有一个LNMP一键安装包可以帮助我们快速在服务器上搭建好Nignx、MySQL和PHP，省去自己单个下载的麻烦。  进入页面后，新手可以参照下图选择。MySQL和PHP必选，一些不了解的不需要用到的暂时不安装了。    点击生成，把">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手把手教你从零上线小程序+Node.js服务端 (下)">
+<meta property="og:url" content="zhaji.com/mini-demo2/index.html">
+<meta property="og:site_name" content="炸鸡的Blog">
+<meta property="og:description" content="六、搭建线上数据库也就是把我们的本地数据库到服务器上照搬一套。 第一步，下载mysql 第二步，利用phpMyAdmin 实现网页可视化数据库，方便查看和管理 LNMP有一个LNMP一键安装包可以帮助我们快速在服务器上搭建好Nignx、MySQL和PHP，省去自己单个下载的麻烦。  进入页面后，新手可以参照下图选择。MySQL和PHP必选，一些不了解的不需要用到的暂时不安装了。    点击生成，把">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600353730552-9880ec55-9197-4595-a55f-2aff4b6f4a6f.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600355017953-ceb73acb-e488-4f98-9417-ec901e702d57.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600356857489-680afc1f-6301-4bbe-abec-0a0362e6d2c6.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600355905276-5ec1cee9-f48a-4e77-ad5d-72a38c418586.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600356675908-07e068bf-bad9-4bbe-95a6-80b039b81720.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600356986311-5ff0a9f6-40e2-4b29-8d13-e6361162af9e.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600445754554-2dd73dfc-ad4e-4ee9-952f-8dcdb82030bd.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600186697645-9ab45cb4-5b86-42ac-9e75-83bc1958400d.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600188009893-ee1ad4d0-6a51-4b54-90ad-2dcd7e66c1fd.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600188254981-1165fbec-17b5-49b5-a15f-3dd12c6dae1f.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600188506480-57eb3416-f6b5-4d7c-aeb1-2a0333a54419.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600189142510-060ee57f-c805-4b84-9378-c7149bdac2bb.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600359008625-a30e8bbb-d83a-43c9-8eaa-b4e03038676c.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600433291993-979374af-8a21-4fb3-b149-aa93b7dd7a58.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600434252410-baa61e4d-32cc-4746-a1ca-cfc7f4384b61.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600434157877-0b38dd35-871a-4006-acc5-e29d8ad7fc94.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600435517047-389c6d14-2cb4-4dfb-957e-4d3b47648cc2.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600438579899-d56f72c5-cc6c-4fd8-8ffc-735ef55f77bc.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600438465930-bca4c37d-df6d-4f38-812e-abad57de60a3.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600438579791-268edebe-6ff2-4aae-b727-0b7fbc2ab636.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600440543085-25f6f84e-b8b0-4d73-936c-1492f38e18ff.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1601216768372-b914f993-225e-427b-8fce-e80ec37b18cf.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:updated_time" content="2020-10-07T07:54:05.519Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="手把手教你从零上线小程序+Node.js服务端 (下)">
+<meta name="twitter:description" content="六、搭建线上数据库也就是把我们的本地数据库到服务器上照搬一套。 第一步，下载mysql 第二步，利用phpMyAdmin 实现网页可视化数据库，方便查看和管理 LNMP有一个LNMP一键安装包可以帮助我们快速在服务器上搭建好Nignx、MySQL和PHP，省去自己单个下载的麻烦。  进入页面后，新手可以参照下图选择。MySQL和PHP必选，一些不了解的不需要用到的暂时不安装了。    点击生成，把">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1600353730552-9880ec55-9197-4595-a55f-2aff4b6f4a6f.png?x-oss-process=image%2Fresize%2Cw_1500">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: false,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="zhaji.com/mini-demo2/">
+
+
+
+
+
+  <title>手把手教你从零上线小程序+Node.js服务端 (下) | 炸鸡的Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">炸鸡的Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="zhaji.com/mini-demo2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="炸鸡">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="炸鸡的Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">手把手教你从零上线小程序+Node.js服务端 (下)</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-09-29T21:52:16+08:00">
+                2020-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="六、搭建线上数据库"><a href="#六、搭建线上数据库" class="headerlink" title="六、搭建线上数据库"></a>六、搭建线上数据库</h1><p>也就是把我们的本地数据库到服务器上照搬一套。</p>
+<p>第一步，下载<code>mysql</code></p>
+<p>第二步，利用<code>phpMyAdmin</code> 实现网页可视化数据库，方便查看和管理</p>
+<h2 id="LNMP"><a href="#LNMP" class="headerlink" title="LNMP"></a>LNMP</h2><p>有一个<a href="https://lnmp.org/auto.html" target="_blank" rel="noopener">LNMP一键安装包</a>可以帮助我们快速在服务器上搭建好Nignx、MySQL和PHP，省去自己单个下载的麻烦。</p>
+<ul>
+<li>进入页面后，新手可以参照下图选择。MySQL和PHP必选，一些不了解的不需要用到的暂时不安装了。</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600353730552-9880ec55-9197-4595-a55f-2aff4b6f4a6f.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<ul>
+<li>点击生成，把生成的安装命令复制到服务器命令行下（右键就是复制），回车即可。</li>
+<li>安装过程非常慢，不用等，可以先看看之后的操作。</li>
+</ul>
+<p>安装完成后，输入<code>lnmp</code>看看是否出现相关信息，若出现了表示安装成功了。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600355017953-ceb73acb-e488-4f98-9417-ec901e702d57.png" alt="image.png"></p>
+<p><code>lnmp mysql start</code> 启动数据库。</p>
+<p>输入网址<code>yourIp/phpmyadmin</code>即可看到线上数据库，需要输入账户和密码。</p>
+<h2 id="导出-sql"><a href="#导出-sql" class="headerlink" title="导出.sql"></a>导出.sql</h2><p>将本地电脑上创建好的数据库导出为<code>.sql</code> （创建该数据库的命令sql集合）避免在云服务器上重复创建了。</p>
+<ol>
+<li>选择Adminitration</li>
+<li>Data Export 数据导出</li>
+<li>选择想要导出的数据库</li>
+<li>导出表格还是导出数据还是都导出，这里只导出表格</li>
+<li>导出为一个.sql文件，选择导出目录</li>
+<li>包括数据库创建</li>
+<li>开始导出</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600356857489-680afc1f-6301-4bbe-abec-0a0362e6d2c6.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>然后，我们拿到了<code>mini_demo.sql</code></p>
+<h2 id="导入-sql"><a href="#导入-sql" class="headerlink" title="导入.sql"></a>导入.sql</h2><p>来到phpMyAdmin页面，登录之后选择主页，点击导入，选择刚刚生成的sql文件，滚动到最下面点击执行。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600355905276-5ec1cee9-f48a-4e77-ad5d-72a38c418586.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>最后执行结果应该为这样。如果导入过程出现报错，发现原因后可以打开sql文件手动修改。比如B表有个外键引自</p>
+<p>A表，那必须要先创建A表，否则就会报错，这时候把两个表的创建命令换一下位置就行。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600356675908-07e068bf-bad9-4bbe-95a6-80b039b81720.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>检查一下，没错。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600356986311-5ff0a9f6-40e2-4b29-8d13-e6361162af9e.png" alt="image.png"></p>
+<p>恭喜你，线上数据库搭建完了。（lnmp可能还在下载，先看看下一节）</p>
+<h1 id="七、部署到云服务器并启动"><a href="#七、部署到云服务器并启动" class="headerlink" title="七、部署到云服务器并启动"></a>七、部署到云服务器并启动</h1><p>上线其实很简单，无非就是让我们的后端代码在云服务器上跑起来。</p>
+<p>如果你还不知道云服务器是什么，可以去<a href="https://www.aliyun.com/?utm_content=se_1000301881" target="_blank" rel="noopener">阿里云</a>点点看看。如果你是个学生并且对开发有兴趣，（请赶快买吧！）学生价还是很香的哟。</p>
+<p>到此为止，假设我们已经拥有了自己的服务器。</p>
+<h2 id="登录服务器"><a href="#登录服务器" class="headerlink" title="登录服务器"></a>登录服务器</h2><ul>
+<li>打开终端</li>
+<li><code>ssh root@yourip</code></li>
+<li>输入密码</li>
+<li>登录成功</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600445754554-2dd73dfc-ad4e-4ee9-952f-8dcdb82030bd.png" alt="image.png"></p>
+<h2 id="拉取代码"><a href="#拉取代码" class="headerlink" title="拉取代码"></a>拉取代码</h2><p>如果你的本地代码还没上传到GitHub，赶紧的先上传。步骤就不再赘述，一搜便是。</p>
+<ul>
+<li>git 可用 </li>
+</ul>
+<p><code>git --version</code> 查看git是否可用，若出现版本号，直接开始拉取代码。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600186697645-9ab45cb4-5b86-42ac-9e75-83bc1958400d.png" alt="image.png"></p>
+<p>若报错，可以使用<code>yum install git</code> 下载git（云服务器的操作系统通常会自带yum）</p>
+<p>下载完后，添加用户名和邮箱</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &apos;yourName&apos;</span><br><span class="line">git config --global user.email &apos;your Email&apos;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>clone 项目</li>
+</ul>
+<p>进入到目录后，使用<code>git clone &lt;项目地址&gt;</code> 拉取代码到服务器上。</p>
+<p>若使用ssh地址并且服务器上的git密钥没有添加到你的GitHub帐号上，会报无权限错误，有两种解决方法（推荐2）</p>
+<ol>
+<li>改用https地址clone</li>
+<li><code>ssh-keygen -t rsa -C &#39;yourEmaill&#39;</code> 生成密钥并添加到GitHub帐号上。</li>
+</ol>
+<p>重新clone</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600188009893-ee1ad4d0-6a51-4b54-90ad-2dcd7e66c1fd.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<h2 id="启动项目"><a href="#启动项目" class="headerlink" title="启动项目"></a>启动项目</h2><ul>
+<li>进入项目目录 cd xxx （按下tab键会有文件夹名称提示）</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600188254981-1165fbec-17b5-49b5-a15f-3dd12c6dae1f.png" alt="image.png"></p>
+<ul>
+<li>下载依赖包 <code>npm install</code> ，可简写为<code>npm i</code></li>
+</ul>
+<p>若command not found ，说明没有npm环境，同时检查一下是否有node，不存在可以参考<a href="https://blog.csdn.net/abcdefg2343/article/details/81355002" target="_blank" rel="noopener">此文章</a>进行下载，两种方式选择一种就行。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600188506480-57eb3416-f6b5-4d7c-aeb1-2a0333a54419.png" alt="image.png"></p>
+<ul>
+<li>按照本地同样的方式启动 <code>export XXX=&quot;xxx&quot; ... &amp;&amp; node index.js</code></li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600189142510-060ee57f-c805-4b84-9378-c7149bdac2bb.png" alt="image.png"></p>
+<ul>
+<li>若出现以上信息，说明云服务器本地已经成功启动服务端了，外界访问它的地址是 <code>yourIP:端口号</code></li>
+</ul>
+<p>例如，我的是这个<a href="http://blog.escript.cn:3000/" target="_blank" rel="noopener">地址</a>（域名通过DNS解析最后访问的也是ip地址）</p>
+<h3 id="持久化"><a href="#持久化" class="headerlink" title="持久化"></a>持久化</h3><p>普通的node 启动项目，当退出终端之后，服务端也就停止运行了，不能实现随时随地访问。</p>
+<p>我们使用npm包 <code>pm2</code> 工具持久化运行。</p>
+<p><code>npm install pm2 -g</code>下载</p>
+<p><code>pm2 -v</code>检测</p>
+<p>然后使用下面的命令启动项目，请先填入自己的环境变量信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start index.js --env=&#123;&quot;DATABASE&quot;: &quot;&quot;,&quot;USER&quot;: &quot;&quot;,&quot;PWD&quot;:&quot;&quot;,&quot;APPID&quot;: &quot;&quot;,&quot;SECRET&quot;: &quot;&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>但是通过这种方式启动起来的项目不会输出信息，所以先确保使用<code>node</code>启动没问题后，再使用该方法启动，否则一旦出错，都不知道问题在哪里。</p>
+<h2 id="线上联调"><a href="#线上联调" class="headerlink" title="线上联调"></a>线上联调</h2><p>这时把小程序的<code>baseUrl</code> 替换为我们的服务器启动该项目的地址，然后开始调试吧。</p>
+<p>过程中总会出现问题的，遇到问题不要心急，要从可能的错误原因一个个排查。</p>
+<p>分享一个我的错误吧，login登录的时候报的错。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600359008625-a30e8bbb-d83a-43c9-8eaa-b4e03038676c.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>访问数据库被拒绝，需要密码。第一反应是数据库的问题，<code>mysql -u root -p</code> 输入密码后就进入数据库了，那说明数据库本身没问题，可能的原因就是环境变量的用户名和密码写错了，检查一下输出，果然密码的引号是中文格式的，所以报错了。</p>
+<p>修改完后重启，就没什么问题了。</p>
+<h1 id="八、配置https"><a href="#八、配置https" class="headerlink" title="八、配置https"></a>八、配置https</h1><p>小程序发布和联调，服务端地址都需要使用https协议，否则啥也访问不到。</p>
+<p>https证书申请通常是和域名绑定的，所以我们先需要一个域名。在<a href="https://dc.console.aliyun.com/next/index?spm=5176.12818093.0.ddomain.5aa416d0snfnXD#/domain/list/all-domain" target="_blank" rel="noopener">阿里云域名</a>或者<a href="https://console.dnspod.cn/" target="_blank" rel="noopener">腾讯云域名</a>下购买一个域名。</p>
+<h2 id="ip地址改域名"><a href="#ip地址改域名" class="headerlink" title="ip地址改域名"></a>ip地址改域名</h2><p>个人购买的绝大部分是二级域名，也就是a.b形式的。拿到域名后，去<a href="https://console.dnspod.cn/dns/list" target="_blank" rel="noopener">域名解析页</a>添加域名，然后添加记录（三级域名）。</p>
+<p>什么是二三级域名？例如<a href="http://tieba.baudu.com" target="_blank" rel="noopener">tieba.baudu.com</a>，其中<code>.com</code>是一级（顶级）域名，<code>baidu</code>是二级域名，<code>tieba</code>是三级域名。二级域名可以衍生出很多三级域名。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600433291993-979374af-8a21-4fb3-b149-aa93b7dd7a58.png" alt="image.png"></p>
+<p>这种不对外开放的后端地址，我们添加一个三级域名映射即可。</p>
+<p>主机记录就是三级域名名字</p>
+<p>记录类型为<code>CNAME</code> 表示映射到记录值对应的ip地址；如果为<code>A</code> 表示映射到ip。这样的好处就是如果ip有变动，只修改一次ip即可</p>
+<p>记录值就是ip地址，可以为ip或者域名</p>
+<p>最后点击确认即可</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600434252410-baa61e4d-32cc-4746-a1ca-cfc7f4384b61.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>我最后要访问的服务器地址就是<a href="http://mini_demo.escript.cn" target="_blank" rel="noopener">mini_demo.escript.cn</a>，进入之后的页面与直接访问自己的ip地址一样，说明域名解析成功了。</p>
+<h2 id="申请SSl证书"><a href="#申请SSl证书" class="headerlink" title="申请SSl证书"></a>申请SSl证书</h2><p><a href="https://yundun.console.aliyun.com/" target="_blank" rel="noopener">阿里云</a>或<a href="https://console.cloud.tencent.com/ssl" target="_blank" rel="noopener">腾讯云</a>上可以免费购买ssl证书，前提需要实名认证。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600434157877-0b38dd35-871a-4006-acc5-e29d8ad7fc94.png" alt="image.png"></p>
+<p>买完后绑定上一步生成的域名，验证通过后就可以下载使用了。</p>
+<p>这是阿里云的免费证书，点击下载，选择其中一个服务器，这样下载到的是本地电脑上。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600435517047-389c6d14-2cb4-4dfb-957e-4d3b47648cc2.png" alt="image.png"></p>
+<p>如果项目在自己电脑上运行，我们可能直接会把证书文件放到项目文件夹里，但如果该项目要上传到服务器，则下载的证书文件最好不要直接暴露在项目中，可以选择下载到服务器别的文件夹里。</p>
+<p>有两种方法</p>
+<ul>
+<li>直接下载到服务器：wget url下载链接</li>
+<li>若url失效，则先下载到本地，使用<code>scp xxx.zip root@ip:/root/https</code> ，使用<code>unzip xxx.zip</code> 命令解压</li>
+</ul>
+<h2 id="启动https服务"><a href="#启动https服务" class="headerlink" title="启动https服务"></a>启动https服务</h2><p>需要最后一次修改服务端代码。</p>
+<p>下载https<code>npm i https</code>，用来启动https服务。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">// index.js</span><br><span class="line"></span><br><span class="line">const https = require(&quot;https&quot;)</span><br><span class="line"></span><br><span class="line">// SSL options</span><br><span class="line">// 若读取不到文件，则启动http服务</span><br><span class="line">try &#123;</span><br><span class="line">  const options = &#123;</span><br><span class="line">    key: fs.readFileSync(&quot;/root/https/xxx.key&quot;), //ssl文件路径  下载下来的证书文件</span><br><span class="line">    cert: fs.readFileSync(&quot;/root/https/xxx.pem&quot;) //ssl文件路径  下载下来的证书文件</span><br><span class="line">  &#125;;</span><br><span class="line">  // 创建https 服务</span><br><span class="line">  const httpsServer = https.createServer(options, app.callback());</span><br><span class="line">  httpsServer.listen(443); // 默认监听443</span><br><span class="line">  console.log(&quot;已启动https服务&quot;);</span><br><span class="line"></span><br><span class="line">&#125; catch (error) &#123;</span><br><span class="line">  app.listen(3000);</span><br><span class="line">  console.log(&quot;无证书文件！已启动http服务，端口3000&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这些也都先在本地电脑上编码测试，通过之后再上传到服务器。</p>
+<p>这个过程应该没什么问题。完成后，与之前一样自测一遍https接口，通过之后把小程序的<code>baseUrl</code>改成最新的https地址。</p>
+<p>过五关斩六将，终于来到了激动人心的时刻。</p>
+<p>确保你的小程序本地编译都通过后，来，向前一步，让梦想照进现实。</p>
+<h1 id="九、审核发布"><a href="#九、审核发布" class="headerlink" title="九、审核发布"></a>九、审核发布</h1><h2 id="上传"><a href="#上传" class="headerlink" title="上传"></a>上传</h2><p>进入微信开发者工具，点击右上角的上传按钮，跳出一个提示弹窗，点击确定。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600438579899-d56f72c5-cc6c-4fd8-8ffc-735ef55f77bc.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>然后输入版本号和备注。</p>
+<p>如果是正式版，可以发布为v1.0.0；试用版v0.0.x</p>
+<p>版本号不是随意取的。虽然输入什么都可以上传成功，但作为一名（专业的）开发人员最好还是遵守一下<a href="https://www.jianshu.com/p/6df3b8dcbe17" target="_blank" rel="noopener">约定</a>，以后工作中都用得上。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600438465930-bca4c37d-df6d-4f38-812e-abad57de60a3.png" alt="image.png">)<img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600438579791-268edebe-6ff2-4aae-b727-0b7fbc2ab636.png" alt="image.png"></p>
+<h2 id="体验版"><a href="#体验版" class="headerlink" title="体验版"></a>体验版</h2><p>上传成功之后，登录<a href="https://mp.weixin.qq.com/wxamp/wacodepage/getcodepage?" target="_blank" rel="noopener">小程序</a>，进入版本管理。</p>
+<p>最下面的开发版本就是刚刚上传的版本，可以将其选为体验版，页面路径就是进入小程序的首页。</p>
+<p>扫描二维码进入体验版，但只有管理员和体验者有权访问，在<a href="https://mp.weixin.qq.com/wxamp/user/manage" target="_blank" rel="noopener">成员管理</a>可以添加体验者。</p>
+<h2 id="审核版"><a href="#审核版" class="headerlink" title="审核版"></a>审核版</h2><p>开发版需要先提交审核，点击一些下一步/确定的按钮们后，再填写一些信息，其中版本描述是用户能够看到的小程序信息之一，所以不要乱写，别的信息都是选填，不填问题也不大。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1600440543085-25f6f84e-b8b0-4d73-936c-1492f38e18ff.png" alt="image.png"></p>
+<p>提交审核之后，该版本就变成了审核版本。</p>
+<p>审核版本先是机器审核，然后人工审核。主要看小程序对用户的权限申请是否规范以及本身是否有问题，现在已经越来越严格了。（有一次我连续审核了六次都没过，最后提出异议，就过了。。</p>
+<h2 id="线上版"><a href="#线上版" class="headerlink" title="线上版"></a>线上版</h2><p>审核通过之后，审核版本发布，管理员扫码确认，就发布成功了。这个版本会变成线上版本</p>
+<p>紧接着，就能在微信上搜到自己的小程序了。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>到底为此，小程序的第一版就over了，我们对如何开发、上线一个以Node.js为服务端的小程序，也应该有了大致了解。接下来就是版本迭代与维护，实现方法大同小异，相信这时候的你已经心里有底了。</p>
+<p>PS：在整个阅读/实践过程中，有任何的问题和建议，都欢迎与我联系。</p>
+<p>欢迎关注我的其他账号～</p>
+<p>掘金：猪是倒着读着</p>
+<p>知乎：猪是倒着读着</p>
+<p>公众号：炸鸡呀</p>
+<img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1601216768372-b914f993-225e-427b-8fce-e80ec37b18cf.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png" style="zoom:25%;">
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Contact</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/add_wechat.jpg" alt="炸鸡 欢迎联系作者～">
+        <p>欢迎联系作者～</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/mini-demo1/" rel="next" title="手把手教你从零上线小程序+Node.js服务端 (上)">
+                <i class="fa fa-chevron-left"></i> 手把手教你从零上线小程序+Node.js服务端 (上)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/「被框架玩坏的孩子们」浏览器环境下使用require/" rel="prev" title="「被框架玩坏的孩子们」浏览器环境下使用require">
+                「被框架玩坏的孩子们」浏览器环境下使用require <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="炸鸡">
+            
+              <p class="site-author-name" itemprop="name">炸鸡</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/LiZhaji" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">炸鸡</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

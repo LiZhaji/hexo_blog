@@ -79,17 +79,21 @@
 
 
 
-<meta name="description" content="已经是1月7号了，上个礼拜加上昨天，终于完成了所有的报告和答辩，唯一心有余悸的是开题答辩老师说做得不够多，但是也没改。整个2019年，很神奇，是至今影响我最多的一个转折年。 学习大抵是2月份开始忙起来，跟邵炀科他们的国赛，较早完成了前端，之后就比较忙于写文档了。3月份开始跟贝史涛的省赛开始逐渐忙起来了，文档系统的前端比较复杂，花了快两个月的时间，每日午出晚归，才完成了基本内容。期间遇到了很多问题，">
+<meta name="description" content="引题常使用框架的孩子们，想要引入一个包时候，通常操作是：  npm i xxx Vue/React组件里通过import/require 引入 可以使用了  某天，当你正在欢乐地写一个html页面时，忽然想使用一个包。于是你向往常一样  npm init  npm i xxx 在页面里import/require引入  这时却发现报错了。  WHY? 首先要清楚JS有两种运行环境：浏览器环境和No">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2019年终总结">
-<meta property="og:url" content="zhaji.com/2019over/index.html">
+<meta property="og:title" content="「被框架玩坏的孩子们」浏览器环境下使用require">
+<meta property="og:url" content="zhaji.com/「被框架玩坏的孩子们」浏览器环境下使用require/index.html">
 <meta property="og:site_name" content="炸鸡的Blog">
-<meta property="og:description" content="已经是1月7号了，上个礼拜加上昨天，终于完成了所有的报告和答辩，唯一心有余悸的是开题答辩老师说做得不够多，但是也没改。整个2019年，很神奇，是至今影响我最多的一个转折年。 学习大抵是2月份开始忙起来，跟邵炀科他们的国赛，较早完成了前端，之后就比较忙于写文档了。3月份开始跟贝史涛的省赛开始逐渐忙起来了，文档系统的前端比较复杂，花了快两个月的时间，每日午出晚归，才完成了基本内容。期间遇到了很多问题，">
+<meta property="og:description" content="引题常使用框架的孩子们，想要引入一个包时候，通常操作是：  npm i xxx Vue/React组件里通过import/require 引入 可以使用了  某天，当你正在欢乐地写一个html页面时，忽然想使用一个包。于是你向往常一样  npm init  npm i xxx 在页面里import/require引入  这时却发现报错了。  WHY? 首先要清楚JS有两种运行环境：浏览器环境和No">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-09-26T09:50:29.276Z">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1601445014529-617ad326-654c-4914-9166-490736e944a4.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1601448155778-4ef354b9-d2e1-4136-a12b-ac14f7be5f51.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1601448194222-f4817ef5-4ba1-499b-94d6-d923c3da844e.png">
+<meta property="og:updated_time" content="2020-10-07T08:08:15.073Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2019年终总结">
-<meta name="twitter:description" content="已经是1月7号了，上个礼拜加上昨天，终于完成了所有的报告和答辩，唯一心有余悸的是开题答辩老师说做得不够多，但是也没改。整个2019年，很神奇，是至今影响我最多的一个转折年。 学习大抵是2月份开始忙起来，跟邵炀科他们的国赛，较早完成了前端，之后就比较忙于写文档了。3月份开始跟贝史涛的省赛开始逐渐忙起来了，文档系统的前端比较复杂，花了快两个月的时间，每日午出晚归，才完成了基本内容。期间遇到了很多问题，">
+<meta name="twitter:title" content="「被框架玩坏的孩子们」浏览器环境下使用require">
+<meta name="twitter:description" content="引题常使用框架的孩子们，想要引入一个包时候，通常操作是：  npm i xxx Vue/React组件里通过import/require 引入 可以使用了  某天，当你正在欢乐地写一个html页面时，忽然想使用一个包。于是你向往常一样  npm init  npm i xxx 在页面里import/require引入  这时却发现报错了。  WHY? 首先要清楚JS有两种运行环境：浏览器环境和No">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1601445014529-617ad326-654c-4914-9166-490736e944a4.png">
 
 
 
@@ -119,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="zhaji.com/2019over/">
+  <link rel="canonical" href="zhaji.com/「被框架玩坏的孩子们」浏览器环境下使用require/">
 
 
 
 
 
-  <title>2019年终总结 | 炸鸡的Blog</title>
+  <title>「被框架玩坏的孩子们」浏览器环境下使用require | 炸鸡的Blog</title>
   
 
 
@@ -252,7 +256,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="zhaji.com/2019over/">
+    <link itemprop="mainEntityOfPage" href="zhaji.com/「被框架玩坏的孩子们」浏览器环境下使用require/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="炸鸡">
@@ -269,7 +273,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">2019年终总结</h2>
+          <h2 class="post-title" itemprop="name headline">「被框架玩坏的孩子们」浏览器环境下使用require</h2>
         
 
         <div class="post-meta">
@@ -281,8 +285,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-07T13:30:40+08:00">
-                2020-01-07
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-05T16:07:55+08:00">
+                2020-10-05
               </time>
             
 
@@ -319,38 +323,67 @@
       
 
       
-        <p>已经是1月7号了，上个礼拜加上昨天，终于完成了所有的报告和答辩，唯一心有余悸的是开题答辩老师说做得不够多，但是也没改。<br>整个2019年，很神奇，是至今影响我最多的一个转折年。</p>
-<h3 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h3><p>大抵是2月份开始忙起来，跟邵炀科他们的国赛，较早完成了前端，之后就比较忙于写文档了。3月份开始跟贝史涛的省赛开始逐渐忙起来了，文档系统的前端比较复杂，花了快两个月的时间，每日午出晚归，才完成了基本内容。期间遇到了很多问题，偶有抱怨和后悔，但现在回想，不得不说，选择是对的。从中比较完整得了解了vue框架，使我踏进了前端大门，此外，还能代替毕设，开心呀。6月份请假一个礼拜，完成了大三下的考试和周末的在浙江工商大学进行的省赛决赛。结果不尽人意，只有二等奖。</p>
-<p>10月份搭建了自己的博客，到目前也才11篇日志。<br>11月份接触react和ts，还有很多横向的知识点，攻击、git等。<br>还有个安卓的课程，学会了点安卓的皮毛。</p>
-<h3 id="工作"><a href="#工作" class="headerlink" title="工作"></a>工作</h3><p>3月份开始就主要在boss直聘找实习，很后悔把阿里当作第一场实习面试，压根没准备，没经验，但竟然好歹还过了二面，之后一直到7月份，都有陆陆续续的被其余部门捞起来，但都没有下文了。另外还面试了安恒，宇视，海康，恒生，智能涂鸦等，总结在这里，比起别人，面的真的不够多。</p>
-<p>最后进了海康业务系统中心，5月末去的实习，干了三个月，每天早晨九点半踩点打卡，晚上准时下班也有，凌晨下班也有。在里边主要就是写业务代码，老体系jquery，新体系vue，时不时会有技术分享会什么的。在龙湖春江悦茗短租了三个月，爸妈和姐给的钱，爷爷也给，老是问我钱够不够。实习工资120一天，又因为本地学生没有房补，这点工资都不够交房租的。8月末进行了一个录用演讲与答辩，就这样拿到了offer。</p>
-<p>想着9月份好好准备秋招，但我真的太懒了。。可以说几乎没有参加。写到这里，很想狠狠得抽自己几下。关键现在也不晚。整整空了快三个月，期间要么在家，大多数是跟着他去公司，在访客中心里边自己学。但好像也没有学到些啥。</p>
-<p>11月中旬来了子之的公司吉米粒，因为3月份才创办，人也才七八个。但技术人员快占了一半，而且感觉都挺厉害的。来了之后主要搭建公司的内部系统，技术栈是react、typescript和mobx。对我而已都是新玩意，但学的欲望也很高，学了三四天后就开始上手撸代码了。</p>
-<p>离过年还剩半个多月，希望可以抓紧这半个多月，改简历，捡捡漏，继续面试。</p>
-<h3 id="生活"><a href="#生活" class="headerlink" title="生活"></a>生活</h3><p>发生了天翻地覆的变化，包括但不限于我个人的思想、情感。</p>
-<p>在遇见明非以前，我一直以为我永远就这样了：不痛不痒，越来越莫得感情。但遇见他以后，除了仰慕，他描述的他，也恰巧是我一直以来都敬佩的，走南闯北。但说实话，第一次看他照片，我就觉得我肯定不可能喜欢上此人，长得十分不符合我的审美。事实证明，谁也逃脱不了真香定律。</p>
-<p>四五月份是我度过的最难熬的两个月。不仅要找实习，还要做比赛，晚上睡觉还要纠结自己的情感状况。<br>最终在一起了。我感觉找到了自我，又迷失了自我。</p>
-<p>暑假实习时，即便工作日，他有时也会大老远的从余杭跑到萧山，早上再从这里出发。那时候五号线都还没开通，只能打车到三坝。第一次去他住宿是星期五临时决定的，本来想回家来着，但他在生病发烧，就屁颠屁颠跑过去了。下地铁就见他坐在助力车上等我，可把我高兴的。<br>8月7号是七夕，周三，他下班后从公司过来，一路跟我汇报到哪了。到家后，竟然发现桌子上放着个花盒。惊了个呆，他也装着一起惊讶，咦，哪来的。<br>10月国庆回家，大概5号就回来了，那天表的白。气球，玫瑰，啧啧。<br>9月起住在古翠路的浙江省立同德医院旁边的古老小区，11月中旬搬进了万通中心的loft。<br>但中间也有很多矛盾，98%的原因就是他前女友以及他之前干的啥。说实话，我确实不该这样，我也觉得这样是我不对，可就是控制不住自己。哎！！难受。</p>
-<p>除了我自己，我姐也有大事。今年圣诞节12月25日，和周健领了证，明年五月初结婚了就。<br>老爸还是每晚失眠，基本上每天跑杭州，姐让他吃的药呢，也不咋吃。<br>老妈在厂里还是很辛苦，每隔个礼拜就盼着我回去。<br>爷爷傍晚能回来的早些了，见到我和姐依旧有说不完的话。<br>外公肺癌每况愈下，在医院和家里来回住，越来越瘦。<br>外婆照顾外公，开始学着做饭。<br>……</p>
-<h3 id="足迹"><a href="#足迹" class="headerlink" title="足迹"></a>足迹</h3><ul>
-<li>6.8，vueConf，上海</li>
-<li>12.8，语雀知识大会，西溪</li>
-<li>12.21，J+互联网沙龙，山东济南</li>
-<li>1.4，seeConf，西湖区文体中心<h3 id="flag"><a href="#flag" class="headerlink" title="flag"></a>flag</h3></li>
-<li>找到满意的工作</li>
-<li>改变性格<ul>
-<li>犹豫-不要纠结于小事，浪费时间</li>
-<li>害怕-说话声太小，语无伦次</li>
-<li>要变得有自信</li>
+        <h1 id="引题"><a href="#引题" class="headerlink" title="引题"></a>引题</h1><p>常使用框架的孩子们，想要引入一个包时候，通常操作是：</p>
+<ul>
+<li>npm i xxx</li>
+<li>Vue/React组件里通过import/require 引入</li>
+<li>可以使用了</li>
 </ul>
+<p>某天，当你正在欢乐地写一个html页面时，忽然想使用一个包。于是你向往常一样</p>
+<ul>
+<li>npm init </li>
+<li>npm i xxx</li>
+<li>在页面里import/require引入</li>
+</ul>
+<p>这时却发现报错了。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1601445014529-617ad326-654c-4914-9166-490736e944a4.png" alt="image.png"></p>
+<p>WHY?</p>
+<p>首先要清楚JS有两种运行环境：浏览器环境和Node.js环境</p>
+<p>像module/exports/require属于CommonJS语法，CommonJS是Node.js采用的模块化规范，而浏览器环境下不支持该语法，所以没有这些变量。</p>
+<p>所以，其报错原因就是因为<strong>浏览器下**</strong>没有这些定义好的变量。**</p>
+<h1 id="模块化"><a href="#模块化" class="headerlink" title="模块化"></a>模块化</h1><p>换句话说，只要浏览器环境下存在这些变量，我们就能正常使用require</p>
+<p>下面是一个简单的例子，可以跑在浏览器环境下并正常输出。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">const</span> <span class="built_in">module</span> = &#123;</span><br><span class="line">   exports: &#123;&#125;</span><br><span class="line"> &#125;;</span><br><span class="line"><span class="keyword">const</span> <span class="built_in">require</span> = <span class="function">(<span class="params">fileModule</span>) =&gt;</span> fileModule.exports;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个虚拟文件</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createInventFile</span>(<span class="params">module, exports</span>) </span>&#123;</span><br><span class="line">  exports.double = <span class="function">(<span class="params">num</span>) =&gt;</span> num * <span class="number">2</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">module</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> file = createInventFile(<span class="built_in">module</span>, <span class="built_in">module</span>.exports);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> &#123; double &#125; = <span class="built_in">require</span>(file);</span><br><span class="line"><span class="built_in">console</span>.log(double(<span class="number">4</span>));</span><br></pre></td></tr></table></figure>
+
+<h2 id="如何运行在不同环境"><a href="#如何运行在不同环境" class="headerlink" title="如何运行在不同环境"></a>如何运行在不同环境</h2><p>如何跑在浏览器环境？</p>
+<ul>
+<li>创建一个html，在script标签里写</li>
+<li>直接打开浏览器控制台，输入js代码</li>
+</ul>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1601448155778-4ef354b9-d2e1-4136-a12b-ac14f7be5f51.png" alt="image.png"></p>
+<p>如何跑在Node环境？</p>
+<ul>
+<li>终端输入node，进入node环境，输入js代码</li>
+<li>创建一个x.js，终端node x.js 运行</li>
+</ul>
+<p>以上代码跑在Node下会报错，因为module等变量都是已定义</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1601448194222-f4817ef5-4ba1-499b-94d6-d923c3da844e.png" alt="image.png"></p>
+<h1 id="browserify"><a href="#browserify" class="headerlink" title="browserify"></a>browserify</h1><p>其实，工具<a href="http://browserify.org/" target="_blank" rel="noopener">browserify</a>已经帮我们实现了以上操作，可以在浏览器下愉快的使用模块化。</p>
+<ul>
+<li>npm init</li>
+<li>npm i -D browserify</li>
+<li>browserify index.js -o compiled.index.js 编译为浏览器可识别的文件</li>
+<li><script src="compiled.index.js"></script> 页面引入
+
+
+
 </li>
-<li>向前看，不要为已经过去的、无力改变的事争吵</li>
-<li>至少看完前端有关五本书，js高教、你不知道的js，等。</li>
-<li>每周出博客，有月总结</li>
-<li>写一个star50+的插件，follower超过50</li>
-<li>熟练弹尤克里里 2首</li>
-<li>可以开始学画画了</li>
 </ul>
+<h1 id="npm包"><a href="#npm包" class="headerlink" title="npm包"></a>npm包</h1><ul>
+<li>把包下载到项目中，引入脚本</li>
+<li>引入cdn</li>
+</ul>
+<h1 id="Node模块，如child-process-fs"><a href="#Node模块，如child-process-fs" class="headerlink" title="Node模块，如child_process/fs"></a>Node模块，如child_process/fs</h1><p>不存在的。</p>
+<p>前面的browserify仅仅是将CommonJS的模块加载机制转化为浏览器可以理解的代码，所以我们能够像在Node下一样在浏览器环境下使用exports和require。</p>
+<p>但这不意味着，我们可以任意使用Node.js模块代码。比如fs，浏览器本身是有沙箱限制的，并不允许我们任意操作本地文件，这与其安全机制背道而驰。然而chrome 83版本开始，在用户授权的情况下，允许浏览器读写用户本地文件了，有兴趣的同学参考<a href="https://juejin.im/post/6844904181896052750#comment" target="_blank" rel="noopener">这篇文章</a>。</p>
+<p>怎么办？</p>
+<p>使用node写一个服务，单独执行。与可执行文件一起打包。打开页面得时候，运行个批处理服务器。</p>
+<hr>
+<p>欢迎关注我的其他账号～</p>
+<p>博客：<a href="http://blog.escript.cn/" target="_blank" rel="noopener">http://blog.escript.cn/</a></p>
+<p>掘金：猪是倒着读着</p>
+<p>知乎：猪是倒着读着</p>
+<p>公众号：炸鸡呀</p>
 
       
     </div>
@@ -399,8 +432,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/trifle/" rel="next" title="trifle">
-                <i class="fa fa-chevron-left"></i> trifle
+              <a href="/mini-demo2/" rel="next" title="手把手教你从零上线小程序+Node.js服务端 (下)">
+                <i class="fa fa-chevron-left"></i> 手把手教你从零上线小程序+Node.js服务端 (下)
               </a>
             
           </div>
@@ -409,8 +442,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/route/" rel="prev" title="前端路由实现 hash和history">
-                前端路由实现 hash和history <i class="fa fa-chevron-right"></i>
+              <a href="/test/" rel="prev" title>
+                 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
