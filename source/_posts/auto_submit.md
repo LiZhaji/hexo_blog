@@ -1,6 +1,6 @@
 ---
 title: 「解放生产力」博客自动发布指南
-date: 2020-10-09 20:49:49
+date: 2020-10-09 21:10:03
 tags:
 ---
 不知道大家有没有过这样的情况，每次更新博客都需要反复操作：
@@ -9,11 +9,11 @@ tags:
   - hexo new name 本地生成文章
   - hexo g 生成public静态文件
   - hexo deploy 部署到gh-pages
+
 - 提交到GitHub
 - 云服务器拉取数据
   - git pull
   - hexo g 生成public静态文件
-
 
 
 不外乎重复这些命令，实在是浪费时间。
@@ -30,13 +30,13 @@ tags:
 
 以下是最终的效果截图
 
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/317801/1602150399069-83ed3ce3-1eaa-479e-9fdb-0c0335a93030.png?x-oss-process=image%2Fresize%2Cw_1500)
+![image.png](//p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/54c94e7489ae48e783cde6300dce6342~tplv-k3u1fbpfcp-zoom-1.image)
 
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/317801/1602150077501-892f9f5f-4e66-4993-bd43-32ce86dc1816.png)
+![image.png](//p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/b90c488b634e4008a0f95cf150a14ecd~tplv-k3u1fbpfcp-zoom-1.image)
 
 上传成功后直接刷新博客，就能看到最近的文章了。
 
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/317801/1602150445947-d08fa572-ded0-459a-9108-4e36e278cd4b.png?x-oss-process=image%2Fresize%2Cw_1500)
+![image.png](//p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/371f90393aa14b25b6e104b6317d3417~tplv-k3u1fbpfcp-zoom-1.image)
 
 
 
@@ -102,7 +102,7 @@ console.log('ok fine')
 
 这时再执行submit，文章创建成功！
 
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/317801/1602141037319-35be9b77-55d3-4866-bc7b-67fada5a1f42.png)
+![image.png](//p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d9c93648791c4827bd8e1c81dad92c35~tplv-k3u1fbpfcp-zoom-1.image)
 
 然而，不知道你有没有发现另一个问题。`ok fine`出现的很快，而下面的info信息过了许久才出现。
 
@@ -195,7 +195,7 @@ const myExec = (cmd, path = blogPath) => {
 
 例如，再执行`hexo new test` 实际生成的文章名为"test-1"
 
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/317801/1602142610574-c65dfa8a-c667-4a93-ad24-689f50dcb57d.png?x-oss-process=image%2Fresize%2Cw_1500)
+![image.png](//p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f331cf517488496cabcaf16c7be38912~tplv-k3u1fbpfcp-zoom-1.image)
 
 继续往下走。
 
@@ -239,9 +239,9 @@ const myExec = (cmd, path = blogPath) => {
 
 但发现，运行到第三行就卡住了，并不能如期实现结果。
 
-![image.png](https://cdn.nlark.com/yuque/0/2020/png/317801/1602144520336-edee42f5-7e76-4409-b9df-05f0d7a29051.png)
+![image.png](//p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a79493733d24488a857a6f469249d93b~tplv-k3u1fbpfcp-zoom-1.image)
 
-查阅资料发现，可以通过[expect](https://www.jianshu.com/p/2fcdf764f464)^[1]^实现服务器登录并执行（mac自带expect）
+查阅资料发现，可以通过[expect](https://www.jianshu.com/p/2fcdf764f464)^[3]^实现服务器登录并执行（mac自带expect）
 
 下面是expect的脚本`yun.sh` 实现了以上命令。
 
@@ -353,7 +353,7 @@ const myExec = (cmd, path = blogPath) => {
 
 # 一个简单的页面
 
-搭建一个页面，参考了[Vue的markdown实例](https://cn.vuejs.org/v2/examples/index.html)^[3]^ ，在此基础上，添加了标题输入和发布按钮。
+搭建一个页面，参考了[Vue的markdown实例](https://cn.vuejs.org/v2/examples/index.html)^[1]^ ，在此基础上，添加了标题输入和发布按钮。
 
 这里贴一下发布代码，使用了xhr对象
 
