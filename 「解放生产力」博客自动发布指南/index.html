@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.jpg?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/avatar.jpg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Web, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="不知道大家有没有过这样的情况，每次更新博客都需要反复操作：  本地更新文章 hexo new name 本地生成文章 hexo g 生成public静态文件 hexo deploy 部署到gh-pages   提交到GitHub 云服务器拉取数据 git pull hexo g 生成public静态文件    不外乎重复这些命令，实在是浪费时间。 那可不可以解放生产力，实现一键发布呢？ 趁着假期搞">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「解放生产力」博客自动发布指南">
+<meta property="og:url" content="zhaji.com/「解放生产力」博客自动发布指南/index.html">
+<meta property="og:site_name" content="炸鸡的Blog">
+<meta property="og:description" content="不知道大家有没有过这样的情况，每次更新博客都需要反复操作：  本地更新文章 hexo new name 本地生成文章 hexo g 生成public静态文件 hexo deploy 部署到gh-pages   提交到GitHub 云服务器拉取数据 git pull hexo g 生成public静态文件    不外乎重复这些命令，实在是浪费时间。 那可不可以解放生产力，实现一键发布呢？ 趁着假期搞">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1602150399069-83ed3ce3-1eaa-479e-9fdb-0c0335a93030.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1602150077501-892f9f5f-4e66-4993-bd43-32ce86dc1816.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1602150445947-d08fa572-ded0-459a-9108-4e36e278cd4b.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1602141037319-35be9b77-55d3-4866-bc7b-67fada5a1f42.png">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1602142610574-c65dfa8a-c667-4a93-ad24-689f50dcb57d.png?x-oss-process=image%2Fresize%2Cw_1500">
+<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1602144520336-edee42f5-7e76-4409-b9df-05f0d7a29051.png">
+<meta property="og:updated_time" content="2020-10-09T12:49:49.552Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="「解放生产力」博客自动发布指南">
+<meta name="twitter:description" content="不知道大家有没有过这样的情况，每次更新博客都需要反复操作：  本地更新文章 hexo new name 本地生成文章 hexo g 生成public静态文件 hexo deploy 部署到gh-pages   提交到GitHub 云服务器拉取数据 git pull hexo g 生成public静态文件    不外乎重复这些命令，实在是浪费时间。 那可不可以解放生产力，实现一键发布呢？ 趁着假期搞">
+<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2020/png/317801/1602150399069-83ed3ce3-1eaa-479e-9fdb-0c0335a93030.png?x-oss-process=image%2Fresize%2Cw_1500">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: false,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="zhaji.com/「解放生产力」博客自动发布指南/">
+
+
+
+
+
+  <title>「解放生产力」博客自动发布指南 | 炸鸡的Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">炸鸡的Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="zhaji.com/「解放生产力」博客自动发布指南/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="炸鸡">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="炸鸡的Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">「解放生产力」博客自动发布指南</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-10-09T20:49:49+08:00">
+                2020-10-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>不知道大家有没有过这样的情况，每次更新博客都需要反复操作：</p>
+<ul>
+<li>本地更新文章<ul>
+<li>hexo new name 本地生成文章</li>
+<li>hexo g 生成public静态文件</li>
+<li>hexo deploy 部署到gh-pages</li>
+</ul>
+</li>
+<li>提交到GitHub</li>
+<li>云服务器拉取数据<ul>
+<li>git pull</li>
+<li>hexo g 生成public静态文件</li>
+</ul>
+</li>
+</ul>
+<p>不外乎重复这些命令，实在是浪费时间。</p>
+<p>那可不可以解放生产力，实现一键发布呢？</p>
+<p>趁着假期搞了一下，使用node就可以实现，但登录服务器有所限制，可以使用expect补充。</p>
+<p>代码地址：<a href="https://github.com/LiZhaji/auto_submit" target="_blank" rel="noopener">https://github.com/LiZhaji/auto_submit</a></p>
+<h1 id="效果预览"><a href="#效果预览" class="headerlink" title="效果预览"></a>效果预览</h1><p>以下是最终的效果截图</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1602150399069-83ed3ce3-1eaa-479e-9fdb-0c0335a93030.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1602150077501-892f9f5f-4e66-4993-bd43-32ce86dc1816.png" alt="image.png"></p>
+<p>上传成功后直接刷新博客，就能看到最近的文章了。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1602150445947-d08fa572-ded0-459a-9108-4e36e278cd4b.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>显然，一键发布的本质是自动执行命令，也就是把上面列举出来的命令统统让代码去执行。</p>
+<p>我们先把最重要的自动发布脚本写出来。</p>
+<h1 id="自动执行命令"><a href="#自动执行命令" class="headerlink" title="*自动执行命令"></a>*自动执行命令</h1><p>我们预期在这里能够完成自动生成文章、上传并登录云服务器。</p>
+<p>了解到Node的<code>child_process.exec</code>可以执行命令。</p>
+<p>那就直接开始吧。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// submit.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> exec = <span class="built_in">require</span>(<span class="string">'child_process'</span>).exec</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> blogPath = <span class="string">'/workspace/hexo_blog'</span> <span class="comment">// 输入你的博客目录地址</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 本地生成文章</span></span><br><span class="line">exec(<span class="string">`cd <span class="subst">$&#123;blogPath&#125;</span>`</span>, log) <span class="comment">// 到博客目录</span></span><br><span class="line">exec(<span class="string">`npx hexo new test`</span>, log)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'ok fine'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> log = <span class="function">(<span class="params">err, stdout, stderr</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(err, stdout, stderr);</span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>按照之前的步骤，很流畅得写下了以上代码。</p>
+<p>然而，<code>node submit.js</code>运行的结果却事与愿违，”它安装了npx…”并没有创建好我们的test文章。</p>
+<p>为了确保问题来源，先去终端下手动执行上面的命令，完全没问题！那很明显，就是目录问题了，说明第一个cd命令没起作用。</p>
+<p>可以使用<code>pwd</code>命令查看当前目录。</p>
+<h2 id="如何在指定目录下执行命令"><a href="#如何在指定目录下执行命令" class="headerlink" title="如何在指定目录下执行命令"></a>如何在指定目录下执行命令</h2><p>有两种方法。</p>
+<ul>
+<li><code>exec(cmd, {cwd: &#39;path&#39;}, (err, stdout, stderr) =&gt; {})</code></li>
+<li><code>require(&#39;shelljs&#39;) shell.cd(&#39;path&#39;)</code></li>
+</ul>
+<p>我们使用第一种方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">exec(<span class="string">`npx hexo new test`</span>, &#123;<span class="attr">cwd</span>: blogPath &#125;, log)</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'ok fine'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>这时再执行submit，文章创建成功！</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1602141037319-35be9b77-55d3-4866-bc7b-67fada5a1f42.png" alt="image.png"></p>
+<p>然而，不知道你有没有发现另一个问题。<code>ok fine</code>出现的很快，而下面的info信息过了许久才出现。</p>
+<p>这并不是我们想要的结果。我们必须要等上一步骤执行完，再去执行下一步，不然都是白操作。</p>
+<p>出现以上现象的原因就在于<strong>exec是**</strong>异步**的，那我们只需要将它转为同步或等待它执行完再去执行下一个就行。</p>
+<h2 id="如何顺序执行"><a href="#如何顺序执行" class="headerlink" title="如何顺序执行"></a>如何顺序执行</h2><p>有两种方法</p>
+<ul>
+<li><code>child_process</code>还提供了<code>execSync</code>方法，用于同步执行命令。但这样没有输出信息。</li>
+<li>将我们后续操作放入回调里。但很容易形成回调地狱。</li>
+</ul>
+<p>为了既有信息输出，又可以顺序执行，我们自己封装一个promise。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 统一命令</span></span><br><span class="line"><span class="keyword">const</span> myExec = <span class="function">(<span class="params">cmd, path = blogPath</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    exec(cmd, &#123; <span class="attr">cwd</span>: path &#125;, (error, stdout, stderr) =&gt; &#123;</span><br><span class="line">      <span class="comment">// 输出信息</span></span><br><span class="line">      log(error, stdout, stderr);</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">if</span> (error) &#123;</span><br><span class="line">        reject(error);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 打印彩色字体的日志</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`「\x1B[34m<span class="subst">$&#123;cmd&#125;</span>\x1B[0m」执行完毕...`</span>);</span><br><span class="line">        resolve(stdout);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在命令的回调中，我们才调用<code>resolve/reject</code>方法，这样就可以确保此时命令已经执行完了。如果执行有错就抛出错误，没有错就返回输出结果。</p>
+<p>然后，就可以愉快的使用了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">    <span class="keyword">await</span> myExec(<span class="string">`npx hexo new test`</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'ok fine'</span>)</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<h2 id="写入内容"><a href="#写入内容" class="headerlink" title="写入内容"></a>写入内容</h2><p>文章创建好了，我们需要给文章添加内容，内容来源于请求。</p>
+<p>因为使用<code>hexo new</code>创建的文章开头会有一些信息，因此我们需要追加内容而不是覆盖内容。<code>fs</code>的<code>appendFile</code>方法，可以实现内容追加。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将内容追加到生成的md文章中</span></span><br><span class="line"><span class="keyword">const</span> appendContent = <span class="function">(<span class="params">title, content</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    fs.appendFile(<span class="string">`<span class="subst">$&#123;blogPath&#125;</span>/source/_posts/<span class="subst">$&#123;title&#125;</span>.md`</span>, content, (err) =&gt; &#123;</span><br><span class="line">      log(err);</span><br><span class="line">      <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        reject(err);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        resolve(<span class="string">"success"</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 统一命令</span></span><br><span class="line"><span class="keyword">const</span> myExec = <span class="function">(<span class="params">cmd, path = blogPath</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    exec(cmd, &#123; <span class="attr">cwd</span>: path &#125;, (error, stdout, stderr) =&gt; &#123;</span><br><span class="line">      log(error, stdout, stderr);</span><br><span class="line">+      <span class="keyword">if</span> (cmd.includes(<span class="string">'hexo new'</span>)) &#123;</span><br><span class="line">+        title = stdout.split(<span class="string">'/'</span>).pop().slice(<span class="number">0</span>,<span class="number">-4</span>)</span><br><span class="line">+      &#125;</span><br><span class="line">      <span class="comment">// ...</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>同样，也需要等文章内容填入后，我们再执行下一步操作，所以该方法也返回了一个promise。</p>
+<p>其中title是全局变量，由两个地方控制。第一个是接口请求的参数之一title，第二个是<code>hexo new</code> 生成的文章，因为文章重名的话，<code>hexo</code>会自动为加上序号，因此最后要以实际生成的文件名为主，否则文章内容会加错地方。</p>
+<p>例如，再执行<code>hexo new test</code> 实际生成的文章名为”test-1”</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1602142610574-c65dfa8a-c667-4a93-ad24-689f50dcb57d.png?x-oss-process=image%2Fresize%2Cw_1500" alt="image.png"></p>
+<p>继续往下走。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="comment">// 1. 创建文章并部署</span></span><br><span class="line">    <span class="keyword">await</span> myExec(<span class="string">`npx hexo new <span class="subst">$&#123;title&#125;</span>`</span>);</span><br><span class="line">  <span class="keyword">await</span> appendContent(title, content);</span><br><span class="line">  <span class="keyword">await</span> myExec(<span class="string">`npx hexo g`</span>);</span><br><span class="line">  <span class="keyword">await</span> myExec(<span class="string">`npx hexo d`</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 2. push</span></span><br><span class="line">  <span class="keyword">await</span> myExec(<span class="string">`git add .`</span>);</span><br><span class="line">  <span class="keyword">await</span> myExec(<span class="string">`git commit -m "「auto」<span class="subst">$&#123;title&#125;</span> <span class="subst">$&#123;<span class="keyword">new</span> <span class="built_in">Date</span>().toLocaleString()&#125;</span>"`</span>);</span><br><span class="line">  <span class="keyword">await</span> myExec(<span class="string">`git push`</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 3. 云服务器</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<p>到这里都应该没有问题了。</p>
+<h2 id="登录云服务器"><a href="#登录云服务器" class="headerlink" title="登录云服务器"></a>登录云服务器</h2><p>最后的操作是登录云服务器然后拉取代码。</p>
+<p>为了避免交互，设置了服务器的免密登录，然后按部就班</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="comment">// 3. 云服务器</span></span><br><span class="line">  <span class="keyword">await</span> myExec(<span class="string">`ssh root@ip`</span>);</span><br><span class="line">  <span class="keyword">await</span> myExec(<span class="string">`cd hexo_blog`</span>);</span><br><span class="line">  <span class="keyword">await</span> myExec(<span class="string">`git pull`</span>);</span><br><span class="line">  <span class="keyword">await</span> myExec(<span class="string">`hexo g`</span>);</span><br><span class="line">  </span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<p>但发现，运行到第三行就卡住了，并不能如期实现结果。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1602144520336-edee42f5-7e76-4409-b9df-05f0d7a29051.png" alt="image.png"></p>
+<p>查阅资料发现，可以通过<a href="https://www.jianshu.com/p/2fcdf764f464" target="_blank" rel="noopener">expect</a>^[1]^实现服务器登录并执行（mac自带expect）</p>
+<p>下面是expect的脚本<code>yun.sh</code> 实现了以上命令。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/tcl/bin/expect</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">set</span> timeout 30</span><br><span class="line"><span class="built_in">set</span> host <span class="string">"ip"</span></span><br><span class="line"><span class="built_in">set</span> username <span class="string">"root"</span></span><br><span class="line"></span><br><span class="line">spawn ssh <span class="variable">$username</span>@<span class="variable">$host</span></span><br><span class="line">expect <span class="string">"Welcome*"</span> </span><br><span class="line"></span><br><span class="line">send <span class="string">"cd hexo_blog\r"</span></span><br><span class="line">expect <span class="string">"$"</span></span><br><span class="line">send <span class="string">"git pull\r"</span></span><br><span class="line">expect <span class="string">"done"</span></span><br><span class="line">send <span class="string">"hexo g\r"</span></span><br><span class="line">expect <span class="string">"files generated"</span></span><br><span class="line"><span class="comment"># interact # 不保持登录</span></span><br></pre></td></tr></table></figure>
+
+<p>使用<code>expect yun.sh</code>命令执行测试。</p>
+<p>没什么问题后，写入之前的代码中。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">  <span class="comment">// 3. 云服务器</span></span><br><span class="line">  <span class="keyword">await</span> myExec(<span class="string">`expect yun.sh`</span>, <span class="string">`.`</span>);</span><br><span class="line"></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<p>其中第二个参数表示当前目录。</p>
+<p>到此为止，通过一条启动命令我们已经可以如期实现“一键发布”了。</p>
+<p>为了正常使用，我们取消立即执行，将其封装为一个函数然后暴露给外部。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> autoSubmit = <span class="function">(<span class="params">initTitle, content</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 标题的空格换成下划线_</span></span><br><span class="line">  title = initTitle.replace(<span class="regexp">/\s/g</span>, <span class="string">'_'</span>) </span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="keyword">async</span> (resolve, reject) =&gt; &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="comment">// 1. create file</span></span><br><span class="line">      <span class="comment">// 2. push</span></span><br><span class="line">      <span class="comment">// 3. 云服务器</span></span><br><span class="line">      resolve();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">      log(err);</span><br><span class="line">      reject(err);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = autoSubmit;</span><br></pre></td></tr></table></figure>
+
+<h2 id="来点儿美好的提示"><a href="#来点儿美好的提示" class="headerlink" title="来点儿美好的提示"></a>来点儿美好的提示</h2><p>为了更好的使用体验，我们再加点儿东西。</p>
+<p>每条命令在执行的时候都需要一个等待过程，为了让等待不那么枯燥，我们搞一个命令行的加载提示。想了解原理的同学参考<a href="https://zhuanlan.zhihu.com/p/22350732" target="_blank" rel="noopener">命令行中的加载动画，spinner 的艺术</a>^[2]^</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// spinner.js</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Spinner</span> </span>&#123;</span><br><span class="line">  loadingDoc = [<span class="string">"⠋"</span>, <span class="string">"⠙"</span>, <span class="string">"⠹"</span>, <span class="string">"⠸"</span>, <span class="string">"⠼"</span>, <span class="string">"⠴"</span>, <span class="string">"⠦"</span>, <span class="string">"⠧"</span>, <span class="string">"⠇"</span>, <span class="string">"⠏"</span>];</span><br><span class="line">  index = <span class="number">0</span>;</span><br><span class="line">  timer = <span class="literal">null</span>;</span><br><span class="line">  start(desc) &#123;</span><br><span class="line">    <span class="keyword">this</span>.timer = setInterval(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      process.stdout.write(</span><br><span class="line">        <span class="string">`\r<span class="subst">$&#123;<span class="keyword">this</span>.loadingDoc[<span class="keyword">this</span>.index++ % <span class="keyword">this</span>.loadingDoc.length]&#125;</span> <span class="subst">$&#123;desc&#125;</span>...`</span></span><br><span class="line">      );</span><br><span class="line">    &#125;, <span class="number">300</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  stop() &#123;</span><br><span class="line">    clearInterval(<span class="keyword">this</span>.timer);</span><br><span class="line">    process.stdout.write(<span class="string">'\n'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = Spinner;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// submit.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> Spinner = <span class="built_in">require</span>(<span class="string">"./spinner"</span>);</span><br><span class="line"><span class="keyword">const</span> spinner = <span class="keyword">new</span> Spinner();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 统一命令</span></span><br><span class="line"><span class="keyword">const</span> myExec = <span class="function">(<span class="params">cmd, path = blogPath</span>) =&gt;</span> &#123;</span><br><span class="line">+  spinner.start(cmd);</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    exec(cmd, &#123; <span class="attr">cwd</span>: path &#125;, (error, stdout, stderr) =&gt; &#123;</span><br><span class="line">+      spinner.stop();</span><br><span class="line">     </span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="一个简单的页面"><a href="#一个简单的页面" class="headerlink" title="一个简单的页面"></a>一个简单的页面</h1><p>搭建一个页面，参考了<a href="https://cn.vuejs.org/v2/examples/index.html" target="_blank" rel="noopener">Vue的markdown实例</a>^[3]^ ，在此基础上，添加了标题输入和发布按钮。</p>
+<p>这里贴一下发布代码，使用了xhr对象</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 发布</span></span><br><span class="line"><span class="keyword">const</span> submit = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="keyword">this</span>.title || !<span class="keyword">this</span>.input) &#123;</span><br><span class="line">    alert(<span class="string">'文章标题或内容不可为空'</span>)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">const</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">  xhr.open(<span class="string">"post"</span>, <span class="string">"http://127.0.0.1:8888"</span>, <span class="literal">true</span>);</span><br><span class="line">  xhr.setRequestHeader(<span class="string">"Content-Type"</span>, <span class="string">"text/plain; charset=utf8"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> data = &#123;</span><br><span class="line">    title: <span class="keyword">this</span>.title,</span><br><span class="line">    content: <span class="keyword">this</span>.input</span><br><span class="line">  &#125;</span><br><span class="line">  xhr.send(<span class="built_in">JSON</span>.stringify(data));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上代码先检查了文章标题和内容不为空，然后创建一个xhr对象和post连接，设置了请求头类型，最后将数据以json格式发送给后台。</p>
+<h1 id="一个简单的服务"><a href="#一个简单的服务" class="headerlink" title="一个简单的服务"></a>一个简单的服务</h1><p>使用<code>http</code>创建一个服务，拿到数据后执行发布逻辑。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"><span class="keyword">const</span> autoSubmit = <span class="built_in">require</span>(<span class="string">"./submit"</span>);</span><br><span class="line"></span><br><span class="line">http</span><br><span class="line">  .createServer(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> arr = []</span><br><span class="line">    req.on(<span class="string">"data"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">chunk</span>) </span>&#123;</span><br><span class="line">      arr.push(chunk)</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    req.on(<span class="string">"end"</span>, <span class="keyword">async</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 解析参数</span></span><br><span class="line">      <span class="keyword">const</span> body = Buffer.concat(arr).toString()</span><br><span class="line">      <span class="keyword">const</span> &#123; title, content &#125; = <span class="built_in">JSON</span>.parse(body);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 允许跨域</span></span><br><span class="line">      res.setHeader(<span class="string">"Access-Control-Allow-Origin"</span>, <span class="string">"*"</span>);</span><br><span class="line">      <span class="keyword">await</span> autoSubmit(title, content);</span><br><span class="line">      <span class="comment">// 设置响应头部信息及编码</span></span><br><span class="line">      res.writeHead(<span class="number">200</span>, &#123;<span class="string">"Content-Type"</span>: <span class="string">"application/json; charset=utf8"</span>&#125;);</span><br><span class="line">      res.end(<span class="string">"success"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)</span><br><span class="line">  .listen(<span class="number">8888</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"已运行在端口8888"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>创建服务后，监听了请求的ondata方法，将拿到的二进制数添加到数组中，请求结束时使用<code>Buffer</code>拼接，就拿到了我们请求的发来的数据。</p>
+<p>将拿到的<code>title/content</code>传入封装好的<code>autoSubmit</code>，让该函数去执行命令。</p>
+<p>使用<code>node index.js</code>启动服务。</p>
+<p>查看<a href="https://github.com/LiZhaji/auto_submit/blob/master/README.md" target="_blank" rel="noopener">代码使用指南</a>^[4]^</p>
+<p>参考文章及链接：</p>
+<p>[1] Linux expect详解 <a href="https://www.jianshu.com/p/2fcdf764f464" target="_blank" rel="noopener">https://www.jianshu.com/p/2fcdf764f464</a></p>
+<p>[2] 命令行中的加载动画，spinner 的艺术 <a href="https://zhuanlan.zhihu.com/p/22350732" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/22350732</a></p>
+<p>[3] Markdown 编辑器 Example <a href="https://cn.vuejs.org/v2/examples/index.html" target="_blank" rel="noopener">https://cn.vuejs.org/v2/examples/index.html</a></p>
+<p>[4] 代码使用指南 <a href="https://github.com/LiZhaji/auto_submit/blob/master/README.md" target="_blank" rel="noopener">https://github.com/LiZhaji/auto_submit/blob/master/README.md</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Contact</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/add_wechat.jpg" alt="炸鸡 欢迎联系作者～">
+        <p>欢迎联系作者～</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/demo/" rel="next" title="demo">
+                <i class="fa fa-chevron-left"></i> demo
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="炸鸡">
+            
+              <p class="site-author-name" itemprop="name">炸鸡</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/LiZhaji" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">炸鸡</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
