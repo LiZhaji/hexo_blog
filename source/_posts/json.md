@@ -6,9 +6,9 @@ JSON表示一种数据格式，可以用来表示普通类型（数值字/符串
 
 ```js
 const zhaji = {
-  name: "zhaji",
-  age: "22",
-  family: ["mom", "dad"]
+  name:"zhaji",
+  age:"22",
+  family:["mom", "dad"]
 };
 
 const zhajistr = JSON.stringify(zhaji); 
@@ -44,14 +44,14 @@ JSON.stringify(zhaji, ["name", "family"]);
 ```js
 JSON.stringify(zhaji, (key, val) => {
   switch(key){
-    case "name": return val;
-    case "age": return 23;
-    case "family": {
+    case "name":return val;
+    case "age":return 23;
+    case "family":{
       // 注意 这样的写法会影响原对象zhaji的family，因为指向同一个地址
       val.push("sister"); 
       return val;  
     }
-    default: return val;
+    default:return val;
   }
 })
 // "{"name":"zhaji","age":23,"family":["mom","dad","sister"]}"
@@ -67,9 +67,9 @@ JSON.stringify(zhaji, (key, val) => {
 JSON.stringify(zhaji, '', 4)
 /* 
 "{
-    "name": "zhaji",
-    "age": "22",
-    "family": [
+    "name":"zhaji",
+    "age":"22",
+    "family":[
         "mom",
         "dad"
     ]
@@ -83,9 +83,9 @@ JSON.stringify(zhaji, '', 4)
 JSON.stringify(zhaji, '', '--')
 /*
 "{
---"name": "zhaji",
---"age": "22",
---"family": [
+--"name":"zhaji",
+--"age":"22",
+--"family":[
 ----"mom",
 ----"dad"
 --]
@@ -99,9 +99,9 @@ JSON.stringify(zhaji, '', '--')
 
 ```js
 const zhaji = {
-  name: "zhaji",
-  age: "22",
-  family: ["mom", "dad"],
+  name:"zhaji",
+  age:"22",
+  family:["mom", "dad"],
   toJSON(){
     return "hi zhaji!"
   }
@@ -127,20 +127,20 @@ JSON.stringify(zhaji)
 ```js
 JSON.parse(zhajistr, (key, val) => {
       switch(key){
-        case "name": return `${val}ya!`;
-        case "age": return 18;
-        case "family": {
+        case "name":return `${val}ya!`;
+        case "age":return 18;
+        case "family":{
           val.push("sister"); 
           return val;  
         }
-        default: return val;
+        default:return val;
     }
 })
 /* 
 {
-  name: "zhajiya!",
-  age: 18,
-  family: (3) ["mom", "dad", "sister"]
+  name:"zhajiya!",
+  age:18,
+  family:(3) ["mom", "dad", "sister"]
 }
 /*
 ```
@@ -154,16 +154,16 @@ JSON.parse(zhajistr, (key, val) => {
 
 ```js
 const noappear = {
-    hi1: undefined
+    hi1:undefined
 }
 Object.defineProperties(noappear,{
-  hi2: {
-    value: "hi2",
-    enumerable: false
+  hi2:{
+    value:"hi2",
+    enumerable:false
   },
-  hi3: {
-    value: "hi3",
-    enumerable: true
+  hi3:{
+    value:"hi3",
+    enumerable:true
   }
 })
 
@@ -179,7 +179,7 @@ JSON.stringify(noappear)
 
 [2] JSON | MDN https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/JSON
 
-------------------------------------------------
+------------------------------------------------ 
 
 欢迎关注我的其他账号～
 
