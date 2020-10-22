@@ -1,0 +1,22 @@
+---
+title: 进来看图！
+date: 2020-10-22 23:28:35
+tags:
+---
+<section id="nice" data-tool="mdnice编辑器" data-website="https://www.mdnice.com" style="font-size: 16px; color: black; padding: 0 10px; line-height: 1.6; word-spacing: 0px; letter-spacing: 0px; word-break: break-word; word-wrap: break-word; text-align: left; font-family: Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, 'PingFang SC', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"><p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">了解一下JavaScript历史</p>
+<figure data-tool="mdnice编辑器" style="margin: 0; margin-top: 10px; margin-bottom: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center;"><img src="https://cdn.nlark.com/yuque/0/2020/png/317801/1603376506703-ca324aca-4dda-4291-8abb-dd14c383aae1.png?x-oss-process=image%2Fresize%2Cw_1500" alt="JS发展史" style="display: block; margin: 0 auto; max-width: 100%;"><figcaption style="margin-top: 5px; text-align: center; color: #888; font-size: 14px;">JS发展史</figcaption></figure>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">95年，<strong style="font-weight: bold; color: black;">Brendan Eich</strong>为 Netspace Navigator 2 编写了<strong style="font-weight: bold; color: black;">JavaScript 1.0</strong>，</p>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">96年，在Nespace 3 编写JavaScript 1.1的时候，IE3出现了JScript。这直接导致了JavaScript有两个不同的版本，没有规范语法和特性，业界担心加剧。</p>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">97年，JavaScript1.0提案给ECMA（欧洲计算机制造商协会，Ecma国际前身），由<strong style="font-weight: bold; color: black;">TC39</strong>（第39届技术委员会）负责制定该新脚本语言的标准，最终产物为<strong style="font-weight: bold; color: black;">ECMA-262</strong> 第1版（即ECMAScript 1）</p>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">随后的2版改动不大，编辑加工，无其他任何处理</p>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">3版真正的修改，标志ECMAScript称为真正的编程语言（正则/错误定义/异常处理）</p>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">直到第4版大改，定义了一门新语言，但在正式发布前被弃用，取而代之的是由子委员会编写的ECMAScript3.1，</p>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">09年，于是这个3.1就成为了第5版。（JSON/继承/严格模式）</p>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">15年，第6版发布，大改动。（ES6/ECMAScript2016/harmony和谐版）</p>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">此后每年6月都会出一版本，目前已经到ECMAScript2020了。</p>
+<blockquote class="multiquote-1" data-tool="mdnice编辑器" style="border: none; display: block; font-size: 0.9em; overflow: auto; overflow-scrolling: touch; border-left: 3px solid rgba(0, 0, 0, 0.4); background: rgba(0, 0, 0, 0.05); color: #6a737d; padding-top: 10px; padding-bottom: 10px; padding-left: 20px; padding-right: 10px; margin-bottom: 20px; margin-top: 20px;">
+<p style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0px; color: black; line-height: 26px;">Netscape是一个浏览器，但是后来因种种原因停止了这个项目，Mozilla是由Netscape公司提出的一个开源项目，Firefox是这个项目中的一个部分。</p>
+</blockquote>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">参考资料：</p>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">[1] 《JavaScript高级程序设计第4版》</p>
+<p id="nice-suffix-juejin-container" class="nice-suffix-juejin-container" data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black; margin-top: 20px !important;">本文使用 <a href="https://mdnice.com/?from=juejin" style="text-decoration: none; color: #1e6bb8; word-wrap: break-word; font-weight: bold; border-bottom: 1px solid #1e6bb8;">mdnice</a> 排版</p></section>
