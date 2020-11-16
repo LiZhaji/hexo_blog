@@ -1,0 +1,69 @@
+---
+title: 访问器属性中为什么不能用this调用本属性
+date: 2020-11-16 23:21:36
+tags:
+---
+<section id="nice" data-tool="mdnice编辑器" data-website="https://www.mdnice.com" style="font-size: 16px; color: black; padding: 0 10px; line-height: 1.6; word-spacing: 0px; letter-spacing: 0px; word-break: break-word; word-wrap: break-word; text-align: left; font-family: Roboto, Oxygen, Ubuntu, Cantarell, PingFangSC-light, PingFangTC-light, 'Open Sans', 'Helvetica Neue', sans-serif;"><p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">在红宝书上看对象属性的时候，讲到属性分为数据属性和访问器属性，其中访问器属性可以拦截取值和赋值操作。</p>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">于是，很自然地写出了一个访问器属性的例子。</p>
+<pre class="custom" data-tool="mdnice编辑器" style="margin-top: 10px; margin-bottom: 10px; border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.55) 0px 2px 10px;"><span style="display: block; background: url(https://my-wechat.mdnice.com/point.png); height: 30px; width: 100%; background-size: 40px; background-repeat: no-repeat; background-color: #282c34; margin-bottom: -7px; border-radius: 5px; background-position: 10px 10px;"></span><code class="hljs" style="overflow-x: auto; padding: 16px; color: #abb2bf; display: block; font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; font-size: 12px; -webkit-overflow-scrolling: touch; padding-top: 15px; background: #282c34; border-radius: 5px;"><span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">const</span> person = {};
+<span/><span class="hljs-built_in" style="color: #e6c07b; line-height: 26px;">Object</span>.defineProperty(person, <span class="hljs-string" style="color: #98c379; line-height: 26px;">"name"</span>, {
+<span/>  <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">get</span>() {
+<span/>    <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">return</span> <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.name;
+<span/>  },
+<span/>  <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">set</span>(v) {
+<span/>    <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">this</span>.name = v;
+<span/>  },
+<span/>});
+<span/></code></pre>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">但是无论执行 <code style="font-size: 14px; word-wrap: break-word; padding: 2px 4px; border-radius: 4px; margin: 0 2px; color: #1e6bb8; background-color: rgba(27,31,35,.05); font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; word-break: break-all;">person.name</code> 还是 <code style="font-size: 14px; word-wrap: break-word; padding: 2px 4px; border-radius: 4px; margin: 0 2px; color: #1e6bb8; background-color: rgba(27,31,35,.05); font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; word-break: break-all;">person.name = 'zhaji'</code> 操作，都会报错 <code style="font-size: 14px; word-wrap: break-word; padding: 2px 4px; border-radius: 4px; margin: 0 2px; color: #1e6bb8; background-color: rgba(27,31,35,.05); font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; word-break: break-all;">Uncaught RangeError: Maximum call stack size exceeded</code> ，大意就是无限循环。</p>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">根据经验，最后这应该会是一个很弱智的错误。</p>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">确认了<code style="font-size: 14px; word-wrap: break-word; padding: 2px 4px; border-radius: 4px; margin: 0 2px; color: #1e6bb8; background-color: rgba(27,31,35,.05); font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; word-break: break-all;">this === person</code> 为<code style="font-size: 14px; word-wrap: break-word; padding: 2px 4px; border-radius: 4px; margin: 0 2px; color: #1e6bb8; background-color: rgba(27,31,35,.05); font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; word-break: break-all;">true</code>后，忽然意识到了。<strong style="font-weight: bold; color: black;">get函数的目的就是获取</strong> <strong style="font-weight: bold; color: black;"><code style="font-size: 14px; word-wrap: break-word; padding: 2px 4px; border-radius: 4px; margin: 0 2px; color: #1e6bb8; background-color: rgba(27,31,35,.05); font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; word-break: break-all;">person.name</code></strong> <strong style="font-weight: bold; color: black;">，在这里执行了</strong> <strong style="font-weight: bold; color: black;"><code style="font-size: 14px; word-wrap: break-word; padding: 2px 4px; border-radius: 4px; margin: 0 2px; color: #1e6bb8; background-color: rgba(27,31,35,.05); font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; word-break: break-all;">this.name</code></strong> <strong style="font-weight: bold; color: black;">，这句话本身就是一个取值操作，那就又会调用get函数，所以陷入无限循环了；set也是同样的道理，在函数体里执行了赋值操作。</strong></p>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">那么，应该如何取值赋值呢？看到一个例子。</p>
+<pre class="custom" data-tool="mdnice编辑器" style="margin-top: 10px; margin-bottom: 10px; border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.55) 0px 2px 10px;"><span style="display: block; background: url(https://my-wechat.mdnice.com/point.png); height: 30px; width: 100%; background-size: 40px; background-repeat: no-repeat; background-color: #282c34; margin-bottom: -7px; border-radius: 5px; background-position: 10px 10px;"></span><code class="hljs" style="overflow-x: auto; padding: 16px; color: #abb2bf; display: block; font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; font-size: 12px; -webkit-overflow-scrolling: touch; padding-top: 15px; background: #282c34; border-radius: 5px;"><span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">const</span> peroson = {};
+<span/><span class="hljs-built_in" style="color: #e6c07b; line-height: 26px;">Object</span>.defineProperty(peroson, <span class="hljs-string" style="color: #98c379; line-height: 26px;">"name"</span>, {
+<span/>  <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">get</span>() {
+<span/>    <span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">// return this.name;</span>
+<span/>    <span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">// why 'Maximum call stack size exceeded'? this.name就是get操作。</span>
+<span/>    <span class="hljs-built_in" style="color: #e6c07b; line-height: 26px;">console</span>.log(<span class="hljs-string" style="color: #98c379; line-height: 26px;">"get "</span>, name);
+<span/>    <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">return</span> name
+<span/>  },
+<span/>  <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">set</span>(v) {
+<span/>    <span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">// this.name = v;</span>
+<span/>    <span class="hljs-built_in" style="color: #e6c07b; line-height: 26px;">console</span>.log(<span class="hljs-string" style="color: #98c379; line-height: 26px;">"set "</span>, name, v);
+<span/>    name = v;
+<span/>  },
+<span/>});
+<span/></code></pre>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">这样就可以正常访问和赋值了。在get、set函数中使用 <code style="font-size: 14px; word-wrap: break-word; padding: 2px 4px; border-radius: 4px; margin: 0 2px; color: #1e6bb8; background-color: rgba(27,31,35,.05); font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; word-break: break-all;">name</code> 变量即可。哪儿来的？当我们定义get、set时，js底层给的。（）</p>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">还有一种等价的写法，就是在对象字面量中声明。</p>
+<pre class="custom" data-tool="mdnice编辑器" style="margin-top: 10px; margin-bottom: 10px; border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.55) 0px 2px 10px;"><span style="display: block; background: url(https://my-wechat.mdnice.com/point.png); height: 30px; width: 100%; background-size: 40px; background-repeat: no-repeat; background-color: #282c34; margin-bottom: -7px; border-radius: 5px; background-position: 10px 10px;"></span><code class="hljs" style="overflow-x: auto; padding: 16px; color: #abb2bf; display: block; font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; font-size: 12px; -webkit-overflow-scrolling: touch; padding-top: 15px; background: #282c34; border-radius: 5px;"><span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">const</span> person = {
+<span/>    <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">get</span> name(){
+<span/>    <span class="hljs-built_in" style="color: #e6c07b; line-height: 26px;">console</span>.log(<span class="hljs-string" style="color: #98c379; line-height: 26px;">'get'</span>, name);
+<span/>    <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">return</span> name;
+<span/>  },
+<span/>  <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">set</span> name(v){
+<span/>    <span class="hljs-built_in" style="color: #e6c07b; line-height: 26px;">console</span>.log(<span class="hljs-string" style="color: #98c379; line-height: 26px;">'set'</span>, v);
+<span/>    name = v;
+<span/>  }
+<span/>}
+<span/></code></pre>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">两者的区别？</p>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">效果上没有区别，只是使用get关键字只能在对象初始化时定义访问器属性， <code style="font-size: 14px; word-wrap: break-word; padding: 2px 4px; border-radius: 4px; margin: 0 2px; color: #1e6bb8; background-color: rgba(27,31,35,.05); font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; word-break: break-all;">Object.defineProperty</code> 可以随时添加。</p>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">最重要的区别体现在class时，使用get关键字时，属性被定义在实例的原型上，使用<code style="font-size: 14px; word-wrap: break-word; padding: 2px 4px; border-radius: 4px; margin: 0 2px; color: #1e6bb8; background-color: rgba(27,31,35,.05); font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; word-break: break-all;">Object.defineProperty</code>定义在实例本身上。</p>
+<pre class="custom" data-tool="mdnice编辑器" style="margin-top: 10px; margin-bottom: 10px; border-radius: 5px; box-shadow: rgba(0, 0, 0, 0.55) 0px 2px 10px;"><span style="display: block; background: url(https://my-wechat.mdnice.com/point.png); height: 30px; width: 100%; background-size: 40px; background-repeat: no-repeat; background-color: #282c34; margin-bottom: -7px; border-radius: 5px; background-position: 10px 10px;"></span><code class="hljs" style="overflow-x: auto; padding: 16px; color: #abb2bf; display: block; font-family: Operator Mono, Consolas, Monaco, Menlo, monospace; font-size: 12px; -webkit-overflow-scrolling: touch; padding-top: 15px; background: #282c34; border-radius: 5px;"><span class="hljs-class" style="line-height: 26px;"><span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">class</span> <span class="hljs-title" style="color: #e6c07b; line-height: 26px;">Person</span></span>{
+<span/>    <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">get</span> name(){
+<span/>    <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">return</span> <span class="hljs-string" style="color: #98c379; line-height: 26px;">'zhaji'</span>
+<span/>  }
+<span/>}
+<span/>
+<span/><span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">const</span> p1 = <span class="hljs-keyword" style="color: #c678dd; line-height: 26px;">new</span> Person()
+<span/>p1.name <span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">// zhaji</span>
+<span/>
+<span/><span class="hljs-built_in" style="color: #e6c07b; line-height: 26px;">Object</span>.getOwnPropertyNames(p1) <span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">// []</span>
+<span/><span class="hljs-built_in" style="color: #e6c07b; line-height: 26px;">Object</span>.getOwnPropertyNames(<span class="hljs-built_in" style="color: #e6c07b; line-height: 26px;">Object</span>.getPrototypeOf(p1)) <span class="hljs-comment" style="color: #5c6370; font-style: italic; line-height: 26px;">// ["constructor", "name"]</span>
+<span/></code></pre>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">都有proxy了，怎么还在看getter/setter呢？</p>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">了解一个知识点的演变历史未尝不是一件坏事。</p>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">参考资料：</p>
+<p data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black;">[1] 《getter》https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/get</p>
+<p id="nice-suffix-juejin-container" class="nice-suffix-juejin-container" data-tool="mdnice编辑器" style="font-size: 16px; padding-top: 8px; padding-bottom: 8px; margin: 0; line-height: 26px; color: black; margin-top: 20px !important;">本文使用 <a href="https://mdnice.com/?from=juejin" style="text-decoration: none; color: #1e6bb8; word-wrap: break-word; font-weight: bold; border-bottom: 1px solid #1e6bb8;">mdnice</a> 排版</p></section>
